@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java OOP — Complete Notes (Units 4, 5, 6)</title>
+<style>
+  /* ============================================================
+     RESET & BASE
+     ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.7;
+    color: #1f2937;
+    background: #f7f8fb;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============================================================
+     LAYOUT
+     ============================================================ */
+  .layout { display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  aside.sidebar {
+    width: 290px;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 28px 22px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  aside.sidebar h2 {
+    font-size: 1.15rem;
+    color: #fbbf24;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  aside.sidebar .subtitle {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin-bottom: 22px;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 14px;
+  }
+  aside.sidebar nav ul { list-style: none; }
+  aside.sidebar nav > ul > li { margin-bottom: 18px; }
+  aside.sidebar .unit-title {
+    color: #38bdf8;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    display: block;
+    padding: 6px 0;
+  }
+  aside.sidebar nav ul ul { margin-top: 4px; padding-left: 10px; border-left: 1px solid #1e293b; }
+  aside.sidebar nav ul ul li a {
+    display: block;
+    padding: 5px 10px;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.82rem;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+  }
+  aside.sidebar nav ul ul li a:hover {
+    color: #fbbf24;
+    background: #1e293b;
+    transform: translateX(2px);
+  }
+
+  /* Main */
+  main {
+    flex: 1;
+    padding: 0 0 80px 0;
+    max-width: calc(100% - 290px);
+  }
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 50px 60px;
+  }
+
+  /* ============================================================
+     COVER
+     ============================================================ */
+  .cover {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+    color: #fff;
+    padding: 80px 60px;
+    text-align: center;
+    border-radius: 0 0 30px 30px;
+    margin-bottom: 50px;
+    box-shadow: 0 20px 50px -20px rgba(124, 58, 237, 0.5);
+  }
+  .cover h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+  }
+  .cover p { font-size: 1.1rem; opacity: 0.95; max-width: 600px; margin: 0 auto 18px; }
+  .cover .badges { margin-top: 22px; }
+  .cover .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 18px;
+    border-radius: 50px;
+    margin: 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  /* ============================================================
+     UNITS
+     ============================================================ */
+  .unit {
+    margin-bottom: 70px;
+  }
+  .unit-header {
+    background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
+    color: #fff;
+    padding: 30px 35px;
+    border-radius: 14px;
+    margin-bottom: 35px;
+    box-shadow: 0 8px 25px -10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  .unit-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fbbf24;
+    line-height: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+  .unit-header h2 {
+    font-size: 1.7rem;
+    margin-bottom: 4px;
+  }
+  .unit-header p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+  }
+
+  /* Topic */
+  .topic {
+    background: #fff;
+    border-radius: 12px;
+    padding: 35px 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+    border: 1px solid #e5e7eb;
+  }
+  .topic h3 {
+    color: #4f46e5;
+    font-size: 1.6rem;
+    border-bottom: 3px solid #e0e7ff;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .topic h3::before {
+    content: "▶";
+    color: #fbbf24;
+    font-size: 1rem;
+  }
+  .topic h4 {
+    color: #1e293b;
+    font-size: 1.18rem;
+    margin: 24px 0 10px;
+    padding-left: 12px;
+    border-left: 4px solid #7c3aed;
+  }
+  .topic h5 {
+    color: #4b5563;
+    font-size: 1rem;
+    margin: 18px 0 8px;
+    font-weight: 700;
+  }
+  .topic p { margin-bottom: 12px; color: #374151; }
+  .topic ul, .topic ol { margin: 10px 0 16px 24px; }
+  .topic li { margin-bottom: 6px; }
+  .topic strong { color: #1e293b; }
+  code {
+    background: #eef2ff;
+    color: #4f46e5;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: "Fira Code", "Cascadia Code", Consolas, Monaco, monospace;
+    font-size: 0.88em;
+    font-weight: 500;
+  }
+
+  /* Code blocks */
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 20px 22px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin: 15px 0;
+    font-family: "Fira Code", "Cascadia Code", Consolas, Monaco, monospace;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
+    position: relative;
+    border-left: 4px solid #7c3aed;
+  }
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+    font-weight: normal;
+  }
+  pre::before {
+    content: "Java";
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #7c3aed;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 3px 12px;
+    border-radius: 0 10px 0 8px;
+    font-family: -apple-system, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  pre.ascii::before { content: "Diagram"; background: #0891b2; }
+  .kw { color: #c084fc; font-weight: 600; }
+  .str { color: #86efac; }
+  .com { color: #64748b; font-style: italic; }
+  .typ { color: #fbbf24; }
+  .num { color: #f87171; }
+  .fn  { color: #60a5fa; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    font-size: 0.92rem;
+  }
+  th {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 11px 15px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) { background: #f9fafb; }
+  tr:hover { background: #eef2ff; }
+
+  /* Callouts */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 22px;
+    margin: 20px 0;
+    border-left: 5px solid;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .callout .icon { font-size: 1.3rem; flex-shrink: 0; }
+  .callout .body { flex: 1; }
+  .callout .title { font-weight: 700; margin-bottom: 4px; }
+  .callout.tip       { background: #fef3c7; border-color: #f59e0b; color: #78350f; }
+  .callout.note      { background: #dbeafe; border-color: #3b82f6; color: #1e3a8a; }
+  .callout.warning   { background: #fee2e2; border-color: #ef4444; color: #7f1d1d; }
+  .callout.success   { background: #d1fae5; border-color: #10b981; color: #064e3b; }
+  .callout.exam      { background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: #d97706; color: #78350f; }
+
+  /* Definition box */
+  .definition {
+    background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+    border-left: 5px solid #7c3aed;
+    padding: 18px 24px;
+    border-radius: 10px;
+    margin: 18px 0;
+    font-size: 1rem;
+    color: #4c1d95;
+  }
+  .definition strong { color: #5b21b6; }
+
+  /* Concept cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .card {
+    background: #fff;
+    border: 2px solid #e0e7ff;
+    border-radius: 10px;
+    padding: 18px;
+    transition: all 0.2s ease;
+  }
+  .card:hover {
+    border-color: #7c3aed;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px -8px rgba(124, 58, 237, 0.4);
+  }
+  .card h5 {
+    color: #4f46e5;
+    margin: 0 0 8px;
+    font-size: 1rem;
+  }
+  .card p { font-size: 0.88rem; color: #4b5563; margin: 0; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #6b7280;
+    font-size: 0.85rem;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 60px;
+    background: #fff;
+  }
+  footer strong { color: #4f46e5; }
+
+  /* Print */
+  @media print {
+    aside.sidebar { display: none; }
+    main { max-width: 100%; }
+    .topic { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+    .cover { page-break-after: always; }
+    .unit { page-break-before: always; }
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    aside.sidebar { width: 100%; height: auto; position: relative; }
+    main { max-width: 100%; }
+    .container { padding: 30px 20px; }
+    .cover { padding: 50px 25px; }
+    .cover h1 { font-size: 2rem; }
+    .topic { padding: 22px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ====================== SIDEBAR ====================== -->
+  <aside class="sidebar">
+    <h2>Java OOP Notes</h2>
+    <div class="subtitle">Units 4, 5 &amp; 6 — Complete Guide</div>
+    <nav>
+      <ul>
+        <li>
+          <span class="unit-title">Unit 4 — Inheritance &amp; Polymorphism</span>
+          <ul>
+            <li><a href="#u4-1">1. Types of Inheritance</a></li>
+            <li><a href="#u4-2">2. Method Overloading</a></li>
+            <li><a href="#u4-3">3. Method Overriding</a></li>
+            <li><a href="#u4-4">4. Polymorphism</a></li>
+            <li><a href="#u4-5">5. Interfaces</a></li>
+            <li><a href="#u4-6">6. Abstract Class</a></li>
+            <li><a href="#u4-7">7. super Keyword</a></li>
+            <li><a href="#u4-8">8. final Keyword</a></li>
+            <li><a href="#u4-9">9. Packages</a></li>
+          </ul>
+        </li>
+        <li>
+          <span class="unit-title">Unit 5 — Exception Handling</span>
+          <ul>
+            <li><a href="#u5-1">1. Introduction to Exception</a></li>
+            <li><a href="#u5-2">2. Exception Hierarchy</a></li>
+            <li><a href="#u5-3">3. try &amp; catch</a></li>
+            <li><a href="#u5-4">4. throw &amp; throws</a></li>
+            <li><a href="#u5-5">5. finally Block</a></li>
+            <li><a href="#u5-6">6. Checked vs Unchecked</a></li>
+          </ul>
+        </li>
+        <li>
+          <span class="unit-title">Unit 6 — File Handling</span>
+          <ul>
+            <li><a href="#u6-1">1. Introduction to File</a></li>
+            <li><a href="#u6-2">2. java.io Package</a></li>
+            <li><a href="#u6-3">3. File Class</a></li>
+            <li><a href="#u6-4">4. Create a File</a></li>
+            <li><a href="#u6-5">5. Write to a File</a></li>
+            <li><a href="#u6-6">6. Read from a File</a></li>
+            <li><a href="#u6-7">7. Delete a File</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ====================== MAIN ====================== -->
+  <main>
+
+    <div class="cover">
+      <h1>Java OOP — Complete Notes</h1>
+      <p>A clear, beginner-friendly guide covering Inheritance &amp; Polymorphism, Exception Handling, and File Handling — built to take you from <strong>zero</strong> to <strong>exam-ready</strong>.</p>
+      <div class="badges">
+        <span class="badge">Unit 4 · Inheritance</span>
+        <span class="badge">Unit 5 · Exceptions</span>
+        <span class="badge">Unit 6 · File I/O</span>
+      </div>
+    </div>
+
+    <div class="container">
+
+    <!-- ====================================================
+         UNIT 4 — INHERITANCE & POLYMORPHISM
+         ==================================================== -->
+    <section class="unit" id="unit4">
+      <div class="unit-header">
+        <div class="unit-number">04</div>
+        <div>
+          <h2>Inheritance &amp; Polymorphism</h2>
+          <p>Reusing code, extending behavior, and writing flexible programs.</p>
+        </div>
+      </div>
+
+      <!-- 4.1 Types of Inheritance -->
+      <div class="topic" id="u4-1">
+        <h3>1. Inheritance &amp; Its Types</h3>
+
+        <div class="definition">
+          <strong>Inheritance</strong> is a mechanism by which one class (called the <em>child</em> or <em>subclass</em>) acquires the fields and methods of another class (called the <em>parent</em> or <em>superclass</em>). It is one of the four pillars of OOP and the foundation of <strong>code reusability</strong>.
+        </div>
+
+        <h4>Why Inheritance?</h4>
+        <ul>
+          <li><strong>Code reusability</strong> — write code once in the parent, reuse in many children.</li>
+          <li><strong>Method overriding</strong> — gives the child the power to redefine parent behavior.</li>
+          <li><strong>Models real-world relationships</strong> — "Dog IS-A Animal", "Car IS-A Vehicle".</li>
+        </ul>
+
+        <h4>Syntax</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Parent</span> {
+    <span class="com">// fields and methods</span>
+}
+
+<span class="kw">class</span> <span class="typ">Child</span> <span class="kw">extends</span> <span class="typ">Parent</span> {
+    <span class="com">// inherits everything from Parent</span>
+}</code></pre>
+
+        <h4>The 5 Types of Inheritance</h4>
+        <div class="cards">
+          <div class="card">
+            <h5>1. Single</h5>
+            <p>One subclass inherits from one superclass. <code>A → B</code></p>
+          </div>
+          <div class="card">
+            <h5>2. Multilevel</h5>
+            <p>Chain of inheritance. <code>A → B → C</code></p>
+          </div>
+          <div class="card">
+            <h5>3. Hierarchical</h5>
+            <p>Many children share one parent. <code>A → B, A → C</code></p>
+          </div>
+          <div class="card">
+            <h5>4. Multiple</h5>
+            <p>One class inherits from many. Not allowed via classes — use <strong>interfaces</strong>.</p>
+          </div>
+          <div class="card">
+            <h5>5. Hybrid</h5>
+            <p>Combination of two or more types. Achieved via interfaces.</p>
+          </div>
+        </div>
+
+        <h4>Diagrammatic View</h4>
+<pre class="ascii"><code>Single            Multilevel           Hierarchical
+  A                  A                      A
+  |                  |                     / \
+  B                  B                    B   C
+                     |
+                     C
+
+
+Multiple                       Hybrid
+(via interfaces)               (combination — via interfaces)
+
+  A     B                            A
+   \   /                            / \
+    \ /                            B   C
+     C                              \ /
+                                     D
+(C inherits from         (B and C inherit from A;
+ both A and B)            D inherits from both B and C)</code></pre>
+
+        <h4>Example: Single Inheritance</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Animal</span> {
+    <span class="kw">void</span> <span class="fn">eat</span>() { System.out.println(<span class="str">"Eating..."</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Dog</span> <span class="kw">extends</span> <span class="typ">Animal</span> {
+    <span class="kw">void</span> <span class="fn">bark</span>() { System.out.println(<span class="str">"Barking..."</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Dog</span> d = <span class="kw">new</span> <span class="typ">Dog</span>();
+        d.<span class="fn">eat</span>();   <span class="com">// inherited from Animal</span>
+        d.<span class="fn">bark</span>();  <span class="com">// own method</span>
+    }
+}</code></pre>
+
+        <h4>Example: Multilevel Inheritance</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Animal</span> { <span class="kw">void</span> <span class="fn">eat</span>() { System.out.println(<span class="str">"Eating"</span>); } }
+<span class="kw">class</span> <span class="typ">Dog</span>    <span class="kw">extends</span> <span class="typ">Animal</span> { <span class="kw">void</span> <span class="fn">bark</span>() { System.out.println(<span class="str">"Barking"</span>); } }
+<span class="kw">class</span> <span class="typ">Puppy</span>  <span class="kw">extends</span> <span class="typ">Dog</span>    { <span class="kw">void</span> <span class="fn">weep</span>() { System.out.println(<span class="str">"Weeping"</span>); } }</code></pre>
+
+        <h4>Example: Hierarchical Inheritance</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Animal</span> {
+    <span class="kw">void</span> <span class="fn">eat</span>() { System.out.println(<span class="str">"Eating..."</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Dog</span> <span class="kw">extends</span> <span class="typ">Animal</span> {
+    <span class="kw">void</span> <span class="fn">bark</span>() { System.out.println(<span class="str">"Barking..."</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Cat</span> <span class="kw">extends</span> <span class="typ">Animal</span> {
+    <span class="kw">void</span> <span class="fn">meow</span>() { System.out.println(<span class="str">"Meowing..."</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Dog</span> d = <span class="kw">new</span> <span class="typ">Dog</span>(); d.<span class="fn">eat</span>(); d.<span class="fn">bark</span>();
+        <span class="typ">Cat</span> c = <span class="kw">new</span> <span class="typ">Cat</span>(); c.<span class="fn">eat</span>(); c.<span class="fn">meow</span>();
+    }
+}</code></pre>
+
+        <h4>Example: Multiple Inheritance (via Interfaces)</h4>
+        <p>Java doesn't allow a class to extend multiple classes, but a class can <code>implement</code> multiple interfaces — that's how Java achieves multiple inheritance.</p>
+<pre><code><span class="kw">interface</span> <span class="typ">Father</span> {
+    <span class="kw">void</span> <span class="fn">height</span>();
+}
+
+<span class="kw">interface</span> <span class="typ">Mother</span> {
+    <span class="kw">void</span> <span class="fn">color</span>();
+}
+
+<span class="com">// Child inherits from BOTH Father and Mother</span>
+<span class="kw">class</span> <span class="typ">Child</span> <span class="kw">implements</span> <span class="typ">Father</span>, <span class="typ">Mother</span> {
+    <span class="kw">public void</span> <span class="fn">height</span>() { System.out.println(<span class="str">"Tall like Father"</span>); }
+    <span class="kw">public void</span> <span class="fn">color</span>()  { System.out.println(<span class="str">"Fair like Mother"</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Child</span> c = <span class="kw">new</span> <span class="typ">Child</span>();
+        c.<span class="fn">height</span>();   <span class="com">// Tall like Father</span>
+        c.<span class="fn">color</span>();    <span class="com">// Fair like Mother</span>
+    }
+}</code></pre>
+
+        <h4>Example: Hybrid Inheritance (via Interfaces)</h4>
+        <p>Hybrid = a mix of two or more types of inheritance. The example below combines <strong>hierarchical</strong> (one parent → multiple children) with <strong>multiple</strong> (one child → multiple parents).</p>
+<pre><code><span class="com">// Base class (hierarchical part)</span>
+<span class="kw">class</span> <span class="typ">Animal</span> {
+    <span class="kw">void</span> <span class="fn">eat</span>() { System.out.println(<span class="str">"Eating..."</span>); }
+}
+
+<span class="com">// Two children of Animal (hierarchical)</span>
+<span class="kw">class</span> <span class="typ">Mammal</span> <span class="kw">extends</span> <span class="typ">Animal</span> {
+    <span class="kw">void</span> <span class="fn">walk</span>() { System.out.println(<span class="str">"Walking..."</span>); }
+}
+
+<span class="kw">interface</span> <span class="typ">Bird</span> {
+    <span class="kw">void</span> <span class="fn">fly</span>();
+}
+
+<span class="com">// Bat behaves as both Mammal and Bird (multiple via interface)</span>
+<span class="kw">class</span> <span class="typ">Bat</span> <span class="kw">extends</span> <span class="typ">Mammal</span> <span class="kw">implements</span> <span class="typ">Bird</span> {
+    <span class="kw">public void</span> <span class="fn">fly</span>() { System.out.println(<span class="str">"Flying..."</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Bat</span> b = <span class="kw">new</span> <span class="typ">Bat</span>();
+        b.<span class="fn">eat</span>();    <span class="com">// from Animal</span>
+        b.<span class="fn">walk</span>();   <span class="com">// from Mammal</span>
+        b.<span class="fn">fly</span>();    <span class="com">// from Bird (interface)</span>
+    }
+}</code></pre>
+
+        <div class="callout warning">
+          <span class="icon">⚠</span>
+          <div class="body">
+            <div class="title">Why Java doesn't support Multiple Inheritance with classes</div>
+            To avoid the <strong>Diamond Problem</strong> — ambiguity that arises when two parent classes have a method with the same signature. Java solves this elegantly using <strong>interfaces</strong>.
+          </div>
+        </div>
+
+        <div class="callout exam">
+          <span class="icon">🎯</span>
+          <div class="body">
+            <div class="title">Exam Tip</div>
+            Always draw the diagrams for each type of inheritance and write a 2–3 line code snippet alongside.
+          </div>
+        </div>
+      </div>
+
+      <!-- 4.2 Method Overloading -->
+      <div class="topic" id="u4-2">
+        <h3>2. Method Overloading (Compile-Time Polymorphism)</h3>
+
+        <div class="definition">
+          <strong>Method Overloading</strong> means defining <em>multiple methods with the same name</em> in the same class but with <strong>different parameter lists</strong> (different number, type, or order of parameters).
+        </div>
+
+        <h4>Rules of Overloading</h4>
+        <ul>
+          <li>Method <strong>name must be the same</strong>.</li>
+          <li>Method <strong>parameter list must differ</strong> (count, type, or order).</li>
+          <li><strong>Return type alone</strong> is NOT enough to overload a method.</li>
+          <li>Resolved at <strong>compile-time</strong> — also called <strong>static binding</strong> or <strong>early binding</strong>.</li>
+        </ul>
+
+        <h4>Why Use It?</h4>
+        <ul>
+          <li>Improves <strong>readability</strong> — same name for similar operations.</li>
+          <li>Lets methods perform similar tasks on different input types.</li>
+        </ul>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">class</span> <span class="typ">MathOps</span> {
+    <span class="com">// 1. Two integers</span>
+    <span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b)            { <span class="kw">return</span> a + b; }
+
+    <span class="com">// 2. Two doubles (different type)</span>
+    <span class="kw">double</span> <span class="fn">add</span>(<span class="kw">double</span> a, <span class="kw">double</span> b)   { <span class="kw">return</span> a + b; }
+
+    <span class="com">// 3. Three integers (different count)</span>
+    <span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b, <span class="kw">int</span> c)     { <span class="kw">return</span> a + b + c; }
+}
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">MathOps</span> m = <span class="kw">new</span> <span class="typ">MathOps</span>();
+        System.out.println(m.<span class="fn">add</span>(<span class="num">2</span>, <span class="num">3</span>));         <span class="com">// 5</span>
+        System.out.println(m.<span class="fn">add</span>(<span class="num">2.5</span>, <span class="num">3.5</span>));     <span class="com">// 6.0</span>
+        System.out.println(m.<span class="fn">add</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>));      <span class="com">// 6</span>
+    }
+}</code></pre>
+
+        <div class="callout note">
+          <span class="icon">💡</span>
+          <div class="body">
+            <div class="title">Memory hook</div>
+            "Same name, different signature" → <strong>Overloading</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 4.3 Method Overriding -->
+      <div class="topic" id="u4-3">
+        <h3>3. Method Overriding (Run-Time Polymorphism)</h3>
+
+        <div class="definition">
+          <strong>Method Overriding</strong> means a subclass provides its <em>own implementation</em> of a method that is already defined in its parent class — using the <strong>same name, same parameters, and same return type</strong>.
+        </div>
+
+        <h4>Rules of Overriding</h4>
+        <ul>
+          <li>Method <strong>signature</strong> must be exactly the same as the parent.</li>
+          <li>Access modifier of child can be <strong>same or less restrictive</strong>, never more.</li>
+          <li>Final, static, and private methods <strong>cannot</strong> be overridden.</li>
+          <li>Resolved at <strong>runtime</strong> — also called <strong>dynamic binding</strong> or <strong>late binding</strong>.</li>
+          <li>Use the <code>@Override</code> annotation (optional but recommended for safety).</li>
+        </ul>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Animal</span> {
+    <span class="kw">void</span> <span class="fn">sound</span>() { System.out.println(<span class="str">"Animal makes a sound"</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Dog</span> <span class="kw">extends</span> <span class="typ">Animal</span> {
+    <span class="kw">@Override</span>
+    <span class="kw">void</span> <span class="fn">sound</span>() { System.out.println(<span class="str">"Dog barks"</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Cat</span> <span class="kw">extends</span> <span class="typ">Animal</span> {
+    <span class="kw">@Override</span>
+    <span class="kw">void</span> <span class="fn">sound</span>() { System.out.println(<span class="str">"Cat meows"</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Animal</span> a;
+        a = <span class="kw">new</span> <span class="typ">Dog</span>(); a.<span class="fn">sound</span>();   <span class="com">// Dog barks</span>
+        a = <span class="kw">new</span> <span class="typ">Cat</span>(); a.<span class="fn">sound</span>();   <span class="com">// Cat meows</span>
+    }
+}</code></pre>
+
+        <p>This is <strong>dynamic method dispatch</strong> — the JVM decides at runtime which version of <code>sound()</code> to call based on the actual object type.</p>
+
+        <h4>Overloading vs Overriding</h4>
+        <table>
+          <tr><th>Feature</th><th>Overloading</th><th>Overriding</th></tr>
+          <tr><td>Class</td><td>Same class</td><td>Parent–Child class</td></tr>
+          <tr><td>Parameters</td><td>Must differ</td><td>Must be same</td></tr>
+          <tr><td>Return type</td><td>Can differ</td><td>Same (or covariant)</td></tr>
+          <tr><td>Binding</td><td>Compile-time (static)</td><td>Runtime (dynamic)</td></tr>
+          <tr><td>Polymorphism type</td><td>Compile-time</td><td>Run-time</td></tr>
+          <tr><td>Inheritance needed?</td><td>No</td><td>Yes</td></tr>
+        </table>
+      </div>
+
+      <!-- 4.4 Polymorphism -->
+      <div class="topic" id="u4-4">
+        <h3>4. Polymorphism — The Big Picture</h3>
+
+        <div class="definition">
+          <strong>Polymorphism</strong> means "many forms". In Java, it allows the same action (method call) to behave <em>differently</em> depending on the object that performs it.
+        </div>
+
+        <h4>Two Types</h4>
+        <div class="cards">
+          <div class="card">
+            <h5>Compile-Time</h5>
+            <p>Achieved by <strong>Method Overloading</strong>. The compiler decides which method to call.</p>
+          </div>
+          <div class="card">
+            <h5>Run-Time</h5>
+            <p>Achieved by <strong>Method Overriding</strong>. The JVM decides at runtime based on the actual object.</p>
+          </div>
+        </div>
+
+        <h4>Why is Polymorphism Useful?</h4>
+        <ul>
+          <li><strong>Flexibility</strong> — write code that works with parent types but executes child behavior.</li>
+          <li><strong>Extensibility</strong> — add new subclasses without changing existing code.</li>
+          <li><strong>Cleaner design</strong> — fewer if-else chains.</li>
+        </ul>
+      </div>
+
+      <!-- 4.5 Interfaces -->
+      <div class="topic" id="u4-5">
+        <h3>5. Interfaces</h3>
+
+        <div class="definition">
+          An <strong>interface</strong> is a 100% abstract type — a "contract" that lists method signatures but provides no implementation. Any class that <code>implements</code> the interface promises to define all of its methods.
+        </div>
+
+        <h4>Why Interfaces?</h4>
+        <ul>
+          <li>Achieve <strong>full abstraction</strong>.</li>
+          <li>Enable <strong>multiple inheritance</strong> in Java.</li>
+          <li>Define <strong>contracts</strong> that classes must follow.</li>
+          <li>Decouple "what to do" from "how to do it".</li>
+        </ul>
+
+        <h4>Syntax &amp; Example</h4>
+<pre><code><span class="kw">interface</span> <span class="typ">Drawable</span> {
+    <span class="kw">void</span> <span class="fn">draw</span>();   <span class="com">// abstract by default</span>
+}
+
+<span class="kw">class</span> <span class="typ">Circle</span> <span class="kw">implements</span> <span class="typ">Drawable</span> {
+    <span class="kw">public void</span> <span class="fn">draw</span>() { System.out.println(<span class="str">"Drawing Circle"</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Rectangle</span> <span class="kw">implements</span> <span class="typ">Drawable</span> {
+    <span class="kw">public void</span> <span class="fn">draw</span>() { System.out.println(<span class="str">"Drawing Rectangle"</span>); }
+}</code></pre>
+
+        <h4>Multiple Inheritance via Interfaces</h4>
+<pre><code><span class="kw">interface</span> <span class="typ">Printable</span> { <span class="kw">void</span> <span class="fn">print</span>(); }
+<span class="kw">interface</span> <span class="typ">Showable</span>  { <span class="kw">void</span> <span class="fn">show</span>();  }
+
+<span class="kw">class</span> <span class="typ">Demo</span> <span class="kw">implements</span> <span class="typ">Printable</span>, <span class="typ">Showable</span> {
+    <span class="kw">public void</span> <span class="fn">print</span>() { System.out.println(<span class="str">"Printing"</span>); }
+    <span class="kw">public void</span> <span class="fn">show</span>()  { System.out.println(<span class="str">"Showing"</span>); }
+}</code></pre>
+
+        <h4>Key Points</h4>
+        <ul>
+          <li>All interface methods are <code>public</code> and <code>abstract</code> by default.</li>
+          <li>All variables are <code>public static final</code> (constants).</li>
+          <li>An interface cannot be instantiated directly.</li>
+          <li>A class can implement <strong>multiple interfaces</strong>.</li>
+          <li>From Java 8: interfaces can have <code>default</code> and <code>static</code> methods with bodies.</li>
+        </ul>
+
+        <h4><code>extends</code> vs <code>implements</code></h4>
+        <table>
+          <tr><th>Feature</th><th><code>extends</code></th><th><code>implements</code></th></tr>
+          <tr><td>Used for</td><td>Inheriting a class / extending an interface</td><td>Implementing an interface in a class</td></tr>
+          <tr><td>Multiple allowed?</td><td>Class — No, Interface — Yes</td><td>Yes (multiple interfaces)</td></tr>
+          <tr><td>Syntax</td><td><code>class A extends B</code></td><td><code>class A implements I1, I2</code></td></tr>
+        </table>
+      </div>
+
+      <!-- 4.6 Abstract Class -->
+      <div class="topic" id="u4-6">
+        <h3>6. Abstract Class</h3>
+
+        <div class="definition">
+          An <strong>abstract class</strong> is a class declared with the <code>abstract</code> keyword. It cannot be instantiated and may contain both <strong>abstract methods</strong> (no body) and <strong>concrete methods</strong> (with body).
+        </div>
+
+        <h4>Why Use It?</h4>
+        <ul>
+          <li>Provide a <strong>partial implementation</strong> as a base for child classes.</li>
+          <li>Force subclasses to implement specific methods.</li>
+          <li>Share common code between related classes.</li>
+        </ul>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">abstract class</span> <span class="typ">Shape</span> {
+    <span class="kw">abstract void</span> <span class="fn">draw</span>();              <span class="com">// must be overridden</span>
+    <span class="kw">void</span> <span class="fn">display</span>() { System.out.println(<span class="str">"Shape displayed"</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Rectangle</span> <span class="kw">extends</span> <span class="typ">Shape</span> {
+    <span class="kw">void</span> <span class="fn">draw</span>() { System.out.println(<span class="str">"Drawing Rectangle"</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Shape</span> s = <span class="kw">new</span> <span class="typ">Rectangle</span>();
+        s.<span class="fn">draw</span>();
+        s.<span class="fn">display</span>();
+    }
+}</code></pre>
+
+        <h4>Abstract Class vs Interface</h4>
+        <table>
+          <tr><th>Feature</th><th>Abstract Class</th><th>Interface</th></tr>
+          <tr><td>Methods</td><td>Abstract + Concrete</td><td>Mostly abstract (default/static allowed in Java 8+)</td></tr>
+          <tr><td>Variables</td><td>Any (instance, static, final…)</td><td>Always <code>public static final</code></td></tr>
+          <tr><td>Constructor</td><td>Yes</td><td>No</td></tr>
+          <tr><td>Multiple inheritance</td><td>No</td><td>Yes</td></tr>
+          <tr><td>Keyword to use</td><td><code>extends</code></td><td><code>implements</code></td></tr>
+          <tr><td>When to use</td><td>"IS-A" with shared code</td><td>"CAN-DO" capability/contract</td></tr>
+        </table>
+      </div>
+
+      <!-- 4.7 super -->
+      <div class="topic" id="u4-7">
+        <h3>7. <code>super</code> Keyword</h3>
+
+        <div class="definition">
+          The <code>super</code> keyword refers to the <strong>immediate parent class</strong>. It is used to access parent class members (variables, methods, constructors) from within a child class.
+        </div>
+
+        <h4>Three Uses of <code>super</code></h4>
+        <ol>
+          <li><code>super.variable</code> — access parent class variable</li>
+          <li><code>super.method()</code> — call parent class method</li>
+          <li><code>super(...)</code> — call parent class constructor (must be the first line)</li>
+        </ol>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Animal</span> {
+    String color = <span class="str">"white"</span>;
+    <span class="kw">void</span> <span class="fn">eat</span>() { System.out.println(<span class="str">"Eating..."</span>); }
+}
+
+<span class="kw">class</span> <span class="typ">Dog</span> <span class="kw">extends</span> <span class="typ">Animal</span> {
+    String color = <span class="str">"black"</span>;
+
+    <span class="kw">void</span> <span class="fn">printColor</span>() {
+        System.out.println(color);          <span class="com">// black (own)</span>
+        System.out.println(<span class="kw">super</span>.color);   <span class="com">// white (parent)</span>
+    }
+
+    <span class="kw">void</span> <span class="fn">eat</span>() {
+        <span class="kw">super</span>.<span class="fn">eat</span>();                    <span class="com">// calls parent method</span>
+        System.out.println(<span class="str">"Dog is eating"</span>);
+    }
+}</code></pre>
+      </div>
+
+      <!-- 4.8 final -->
+      <div class="topic" id="u4-8">
+        <h3>8. <code>final</code> Keyword</h3>
+
+        <div class="definition">
+          The <code>final</code> keyword is used to <strong>restrict</strong> the user. It can be applied to variables, methods, and classes — each with a different meaning.
+        </div>
+
+        <h4>The Three Uses of <code>final</code></h4>
+        <table>
+          <tr><th>Applied to</th><th>Effect</th></tr>
+          <tr><td><code>final</code> variable</td><td>Becomes a <strong>constant</strong> — value cannot change.</td></tr>
+          <tr><td><code>final</code> method</td><td>Cannot be <strong>overridden</strong> by subclasses.</td></tr>
+          <tr><td><code>final</code> class</td><td>Cannot be <strong>inherited</strong> (e.g., <code>String</code>).</td></tr>
+        </table>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">final class</span> <span class="typ">Vehicle</span> {
+    <span class="kw">final int</span> wheels = <span class="num">4</span>;            <span class="com">// constant</span>
+    <span class="kw">final void</span> <span class="fn">start</span>() { System.out.println(<span class="str">"Starting..."</span>); }
+}
+
+<span class="com">// ❌ Error: Cannot inherit from final class</span>
+<span class="kw">class</span> <span class="typ">Car</span> <span class="kw">extends</span> <span class="typ">Vehicle</span> { }</code></pre>
+
+        <div class="callout exam">
+          <span class="icon">🎯</span>
+          <div class="body">
+            <div class="title">Exam Tip</div>
+            Always mention the <strong>three uses</strong> of <code>final</code> in your answer.
+          </div>
+        </div>
+      </div>
+
+      <!-- 4.9 Packages -->
+      <div class="topic" id="u4-9">
+        <h3>9. Packages</h3>
+
+        <div class="definition">
+          A <strong>package</strong> is a namespace that organizes a set of related classes and interfaces. It avoids name conflicts and makes large programs easier to maintain.
+        </div>
+
+        <h4>Two Types of Packages</h4>
+        <ul>
+          <li><strong>Built-in:</strong> Provided by Java — <code>java.util</code>, <code>java.io</code>, <code>java.lang</code>, <code>java.net</code>, <code>java.sql</code>.</li>
+          <li><strong>User-defined:</strong> Created by the programmer.</li>
+        </ul>
+
+        <h4>Creating Your Own Package</h4>
+<pre><code><span class="kw">package</span> mypack;     <span class="com">// must be the FIRST line</span>
+
+<span class="kw">public class</span> <span class="typ">MyClass</span> {
+    <span class="kw">public void</span> <span class="fn">show</span>() { System.out.println(<span class="str">"Hello from mypack"</span>); }
+}</code></pre>
+
+        <h4>Importing a Package</h4>
+<pre><code><span class="kw">import</span> mypack.MyClass;            <span class="com">// import a single class</span>
+<span class="kw">import</span> java.util.*;                <span class="com">// import all classes from a package</span>
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">MyClass</span> obj = <span class="kw">new</span> <span class="typ">MyClass</span>();
+        obj.<span class="fn">show</span>();
+    }
+}</code></pre>
+
+        <h4>Advantages</h4>
+        <ul>
+          <li>Avoids <strong>naming conflicts</strong>.</li>
+          <li>Provides <strong>access control</strong> (default access works at package level).</li>
+          <li>Makes code <strong>modular</strong> and easier to find.</li>
+          <li>Enables <strong>code reuse</strong> across projects.</li>
+        </ul>
+
+        <div class="callout exam">
+          <span class="icon">🎯</span>
+          <div class="body">
+            <div class="title">Exam Tip</div>
+            Always write the <code>package</code> statement as the <strong>first line</strong> of your Java file.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         UNIT 5 — EXCEPTION HANDLING
+         ==================================================== -->
+    <section class="unit" id="unit5">
+      <div class="unit-header">
+        <div class="unit-number">05</div>
+        <div>
+          <h2>Exception Handling Mechanism</h2>
+          <p>Writing programs that don't crash when something goes wrong.</p>
+        </div>
+      </div>
+
+      <!-- 5.1 Intro -->
+      <div class="topic" id="u5-1">
+        <h3>1. Introduction to Exception</h3>
+
+        <div class="definition">
+          An <strong>exception</strong> is an event that <em>disrupts the normal flow</em> of a program's instructions. Technically, it is an <strong>object</strong> that the JVM creates and "throws" when something goes wrong at runtime.
+        </div>
+
+        <h4>Real-Life Analogy</h4>
+        <p>Imagine you're driving to college, but the road is closed. You don't stop forever — you take a <em>detour</em>. Exception handling is the "detour" your program takes when it hits a problem.</p>
+
+        <h4>Why Handle Exceptions?</h4>
+        <ul>
+          <li>To prevent the program from <strong>crashing</strong> abruptly.</li>
+          <li>To give the user a <strong>meaningful error message</strong> instead of a stack trace.</li>
+          <li>To <strong>recover gracefully</strong> and continue executing.</li>
+          <li>To separate <strong>error-handling code</strong> from regular logic.</li>
+        </ul>
+
+        <h4>Example: Without Exception Handling</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Demo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="kw">int</span> a = <span class="num">10</span>, b = <span class="num">0</span>;
+        <span class="kw">int</span> c = a / b;             <span class="com">// crashes here</span>
+        System.out.println(<span class="str">"After division"</span>);  <span class="com">// never executes</span>
+    }
+}</code></pre>
+
+        <h4>Example: With Exception Handling</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Demo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="kw">int</span> a = <span class="num">10</span>, b = <span class="num">0</span>;
+        <span class="kw">try</span> {
+            <span class="kw">int</span> c = a / b;
+        } <span class="kw">catch</span> (<span class="typ">ArithmeticException</span> e) {
+            System.out.println(<span class="str">"Cannot divide by zero!"</span>);
+        }
+        System.out.println(<span class="str">"After division"</span>);  <span class="com">// runs normally</span>
+    }
+}</code></pre>
+      </div>
+
+      <!-- 5.2 Hierarchy -->
+      <div class="topic" id="u5-2">
+        <h3>2. Exception Hierarchy</h3>
+
+        <p>All exceptions in Java are descendants of the class <code>java.lang.Throwable</code>. Below <code>Throwable</code>, there are two big branches: <strong>Error</strong> and <strong>Exception</strong>.</p>
+
+<pre class="ascii"><code>                Throwable
+                    │
+        ┌───────────┴───────────┐
+        │                       │
+      Error                  Exception
+   (unrecoverable)         (recoverable)
+        │                       │
+        ├── OutOfMemoryError    ├── Checked Exceptions
+        ├── StackOverflowError  │     ├── IOException
+        └── VirtualMachineError │     ├── SQLException
+                                │     └── FileNotFoundException
+                                │
+                                └── RuntimeException (Unchecked)
+                                      ├── NullPointerException
+                                      ├── ArithmeticException
+                                      └── ArrayIndexOutOfBoundsException</code></pre>
+
+        <h4>Error vs Exception</h4>
+        <table>
+          <tr><th></th><th>Error</th><th>Exception</th></tr>
+          <tr><td>Cause</td><td>Serious JVM/system problems</td><td>Application logic problems</td></tr>
+          <tr><td>Recovery</td><td>Not recoverable — terminate</td><td>Recoverable with try-catch</td></tr>
+          <tr><td>Responsibility</td><td>JVM / system level</td><td>Developer / application level</td></tr>
+          <tr><td>Should you catch?</td><td>No</td><td>Yes</td></tr>
+          <tr><td>Type</td><td>Always unchecked</td><td>Checked or unchecked</td></tr>
+          <tr><td>Examples</td><td><code>OutOfMemoryError</code>, <code>StackOverflowError</code></td><td><code>IOException</code>, <code>NullPointerException</code></td></tr>
+        </table>
+
+        <ul>
+          <li><strong>Errors</strong> = outside your control (e.g., JVM ran out of memory).</li>
+          <li><strong>Exceptions</strong> = your code can <em>anticipate</em> and recover from them.</li>
+        </ul>
+      </div>
+
+      <!-- 5.3 try catch -->
+      <div class="topic" id="u5-3">
+        <h3>3. <code>try</code> &amp; <code>catch</code></h3>
+
+        <p>The <code>try</code> block contains code that <em>might</em> throw an exception. The <code>catch</code> block catches and handles it.</p>
+
+        <h4>Syntax</h4>
+<pre><code><span class="kw">try</span> {
+    <span class="com">// risky code</span>
+} <span class="kw">catch</span> (<span class="typ">ExceptionType</span> e) {
+    <span class="com">// handle exception</span>
+}</code></pre>
+
+        <h4>Example: Single catch</h4>
+<pre><code><span class="kw">try</span> {
+    <span class="kw">int</span>[] arr = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>};
+    System.out.println(arr[<span class="num">10</span>]);
+} <span class="kw">catch</span> (<span class="typ">ArrayIndexOutOfBoundsException</span> e) {
+    System.out.println(<span class="str">"Index out of range: "</span> + e.<span class="fn">getMessage</span>());
+}</code></pre>
+
+        <h4>Example: Multiple catch blocks</h4>
+<pre><code><span class="kw">try</span> {
+    <span class="kw">int</span> a = <span class="typ">Integer</span>.<span class="fn">parseInt</span>(<span class="str">"abc"</span>);
+    <span class="kw">int</span> b = <span class="num">10</span> / a;
+} <span class="kw">catch</span> (<span class="typ">NumberFormatException</span> e) {
+    System.out.println(<span class="str">"Invalid number format"</span>);
+} <span class="kw">catch</span> (<span class="typ">ArithmeticException</span> e) {
+    System.out.println(<span class="str">"Math error"</span>);
+} <span class="kw">catch</span> (<span class="typ">Exception</span> e) {
+    System.out.println(<span class="str">"Some other error: "</span> + e);
+}</code></pre>
+
+        <div class="callout warning">
+          <span class="icon">⚠</span>
+          <div class="body">
+            <div class="title">Order matters!</div>
+            When using multiple catch blocks, always put the <strong>most specific</strong> exceptions first and the <strong>most general</strong> (<code>Exception</code>) last.
+          </div>
+        </div>
+      </div>
+
+      <!-- 5.4 throw throws -->
+      <div class="topic" id="u5-4">
+        <h3>4. <code>throw</code> &amp; <code>throws</code></h3>
+
+        <h4><code>throw</code> — Explicitly raise an exception</h4>
+        <p>Used inside a method body to manually throw an exception object.</p>
+<pre><code><span class="kw">class</span> <span class="typ">AgeCheck</span> {
+    <span class="kw">static void</span> <span class="fn">validate</span>(<span class="kw">int</span> age) {
+        <span class="kw">if</span> (age &lt; <span class="num">18</span>)
+            <span class="kw">throw new</span> <span class="typ">ArithmeticException</span>(<span class="str">"Not eligible to vote"</span>);
+        <span class="kw">else</span>
+            System.out.println(<span class="str">"Welcome to vote"</span>);
+    }
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="fn">validate</span>(<span class="num">15</span>);
+    }
+}</code></pre>
+
+        <h4><code>throws</code> — Declare possible exceptions</h4>
+        <p>Used in a method <em>signature</em> to inform callers that this method might throw certain exceptions. The caller must then handle or re-declare them.</p>
+<pre><code><span class="kw">import</span> java.io.*;
+
+<span class="kw">class</span> <span class="typ">FileDemo</span> {
+    <span class="kw">void</span> <span class="fn">readFile</span>() <span class="kw">throws</span> <span class="typ">IOException</span> {
+        <span class="typ">FileReader</span> fr = <span class="kw">new</span> <span class="typ">FileReader</span>(<span class="str">"data.txt"</span>);
+    }
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="kw">try</span> {
+            <span class="kw">new</span> <span class="typ">FileDemo</span>().<span class="fn">readFile</span>();
+        } <span class="kw">catch</span> (<span class="typ">IOException</span> e) {
+            System.out.println(<span class="str">"File missing"</span>);
+        }
+    }
+}</code></pre>
+
+        <h4><code>throw</code> vs <code>throws</code></h4>
+        <table>
+          <tr><th>Feature</th><th><code>throw</code></th><th><code>throws</code></th></tr>
+          <tr><td>Purpose</td><td>To <em>raise</em> an exception</td><td>To <em>declare</em> an exception</td></tr>
+          <tr><td>Used inside</td><td>Method body</td><td>Method signature</td></tr>
+          <tr><td>Followed by</td><td>An exception <strong>object</strong></td><td>Exception <strong>class names</strong></td></tr>
+          <tr><td>Number</td><td>One at a time</td><td>Multiple, comma-separated</td></tr>
+        </table>
+      </div>
+
+      <!-- 5.5 finally -->
+      <div class="topic" id="u5-5">
+        <h3>5. <code>finally</code> Block</h3>
+
+        <div class="definition">
+          The <code>finally</code> block contains code that <strong>always executes</strong>, whether an exception occurs or not. It's perfect for <em>cleanup code</em> like closing files, releasing locks, or disconnecting from a database.
+        </div>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">try</span> {
+    <span class="kw">int</span> a = <span class="num">10</span> / <span class="num">0</span>;
+} <span class="kw">catch</span> (<span class="typ">ArithmeticException</span> e) {
+    System.out.println(<span class="str">"Caught: "</span> + e);
+} <span class="kw">finally</span> {
+    System.out.println(<span class="str">"Cleanup done — finally always runs"</span>);
+}</code></pre>
+
+        <h4>Key Points</h4>
+        <ul>
+          <li>Runs whether an exception is caught or not.</li>
+          <li>Runs <em>even if</em> a <code>return</code> statement is executed inside try/catch.</li>
+          <li>Only skipped if the JVM exits (e.g., <code>System.exit(0)</code>) or a fatal error.</li>
+          <li>Used mainly for <strong>resource cleanup</strong>.</li>
+        </ul>
+
+        <div class="callout exam">
+          <span class="icon">🎯</span>
+          <div class="body">
+            <div class="title">Exam Tip</div>
+            Always mention that <code>finally</code> is used for <strong>resource cleanup</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 5.6 Checked vs Unchecked -->
+      <div class="topic" id="u5-6">
+        <h3>6. Checked vs Unchecked Exceptions</h3>
+
+        <p>All exceptions in Java fall into two categories based on <strong>when they are detected</strong>:</p>
+        <ol>
+          <li><strong>Checked Exceptions</strong> — detected at <strong>compile-time</strong></li>
+          <li><strong>Unchecked Exceptions</strong> — detected at <strong>runtime</strong></li>
+        </ol>
+
+        <h4>1. Checked Exception (Compile-Time)</h4>
+        <ul>
+          <li>Checked by the <strong>compiler</strong> at compile-time.</li>
+          <li>Must be either <strong>caught</strong> with try-catch or <strong>declared</strong> with <code>throws</code>.</li>
+          <li>If unhandled, the program <strong>will not compile</strong>.</li>
+          <li>Direct subclasses of <code>Exception</code> (but NOT of <code>RuntimeException</code>).</li>
+          <li>Caused by <strong>external factors</strong> — file missing, database down, network down.</li>
+        </ul>
+
+        <h5>Common Checked Exceptions</h5>
+        <table>
+          <tr><th>Exception</th><th>Cause</th></tr>
+          <tr><td><code>IOException</code></td><td>Input/output operation failed</td></tr>
+          <tr><td><code>FileNotFoundException</code></td><td>File does not exist</td></tr>
+          <tr><td><code>SQLException</code></td><td>Database access error</td></tr>
+          <tr><td><code>ClassNotFoundException</code></td><td>Class not found at runtime</td></tr>
+          <tr><td><code>InterruptedException</code></td><td>Thread was interrupted</td></tr>
+        </table>
+
+        <h5>Example: Handling with try-catch</h5>
+<pre><code><span class="kw">import</span> java.io.*;
+
+<span class="kw">class</span> <span class="typ">CheckedDemo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="kw">try</span> {
+            <span class="typ">FileReader</span> file = <span class="kw">new</span> <span class="typ">FileReader</span>(<span class="str">"test.txt"</span>);
+            <span class="typ">BufferedReader</span> br = <span class="kw">new</span> <span class="typ">BufferedReader</span>(file);
+            System.out.println(br.<span class="fn">readLine</span>());
+            br.<span class="fn">close</span>();
+        } <span class="kw">catch</span> (<span class="typ">IOException</span> e) {
+            System.out.println(<span class="str">"File error: "</span> + e.<span class="fn">getMessage</span>());
+        }
+    }
+}</code></pre>
+
+        <h5>Example: Declaring with throws</h5>
+<pre><code><span class="kw">import</span> java.io.*;
+
+<span class="kw">class</span> <span class="typ">CheckedDemo2</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) <span class="kw">throws</span> <span class="typ">IOException</span> {
+        <span class="typ">FileReader</span> file = <span class="kw">new</span> <span class="typ">FileReader</span>(<span class="str">"test.txt"</span>);
+    }
+}</code></pre>
+
+        <h4>2. Unchecked Exception (Runtime)</h4>
+        <ul>
+          <li><strong>Not</strong> checked by the compiler.</li>
+          <li>Occurs at <strong>runtime</strong>.</li>
+          <li>Handling is <strong>optional</strong> — the program compiles successfully even without try-catch.</li>
+          <li>Subclasses of <code>RuntimeException</code> (and <code>Error</code>).</li>
+          <li>Usually due to <strong>programming bugs</strong> — should be fixed in code, not caught.</li>
+        </ul>
+
+        <h5>Common Unchecked Exceptions</h5>
+        <table>
+          <tr><th>Exception</th><th>Cause</th></tr>
+          <tr><td><code>NullPointerException</code></td><td>Accessing a member of a null reference</td></tr>
+          <tr><td><code>ArithmeticException</code></td><td>Illegal arithmetic (e.g., divide by zero)</td></tr>
+          <tr><td><code>ArrayIndexOutOfBoundsException</code></td><td>Invalid array index</td></tr>
+          <tr><td><code>NumberFormatException</code></td><td>Invalid string-to-number conversion</td></tr>
+          <tr><td><code>ClassCastException</code></td><td>Invalid type casting</td></tr>
+        </table>
+
+        <h5>Examples</h5>
+<pre><code><span class="com">// 1. ArithmeticException</span>
+<span class="kw">int</span> a = <span class="num">10</span>, b = <span class="num">0</span>;
+<span class="kw">int</span> c = a / b;             <span class="com">// ❌ ArithmeticException: / by zero</span>
+
+<span class="com">// 2. NullPointerException</span>
+String s = <span class="kw">null</span>;
+System.out.println(s.<span class="fn">length</span>());   <span class="com">// ❌ NullPointerException</span>
+
+<span class="com">// 3. ArrayIndexOutOfBoundsException</span>
+<span class="kw">int</span>[] arr = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>};
+System.out.println(arr[<span class="num">5</span>]);    <span class="com">// ❌ ArrayIndexOutOfBoundsException</span></code></pre>
+
+        <h4>Checked vs Unchecked — Comparison</h4>
+        <table>
+          <tr><th>Feature</th><th>Checked Exception</th><th>Unchecked Exception</th></tr>
+          <tr><td>Checked by compiler?</td><td>Yes</td><td>No</td></tr>
+          <tr><td>When detected?</td><td>Compile-time</td><td>Runtime</td></tr>
+          <tr><td>Handling required?</td><td>Mandatory</td><td>Optional</td></tr>
+          <tr><td>Parent class</td><td><code>Exception</code></td><td><code>RuntimeException</code></td></tr>
+          <tr><td>Caused by</td><td>External factors</td><td>Programming bugs</td></tr>
+          <tr><td>Compiles if unhandled?</td><td>No</td><td>Yes</td></tr>
+          <tr><td>Examples</td><td><code>IOException</code>, <code>SQLException</code></td><td><code>NullPointerException</code>, <code>ArithmeticException</code></td></tr>
+        </table>
+
+        <div class="callout tip">
+          <span class="icon">🧠</span>
+          <div class="body">
+            <div class="title">Memory Trick</div>
+            <strong>Checked</strong> = <strong>C</strong>ompiler <strong>C</strong>hecks → <strong>C</strong>aught or declared.<br>
+            <strong>Unchecked</strong> = <strong>U</strong>ncaught is OK → happens at <strong>r</strong>untime.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         UNIT 6 — FILE HANDLING
+         ==================================================== -->
+    <section class="unit" id="unit6">
+      <div class="unit-header">
+        <div class="unit-number">06</div>
+        <div>
+          <h2>File Handling Mechanism</h2>
+          <p>Reading and writing data permanently using files.</p>
+        </div>
+      </div>
+
+      <!-- 6.1 Intro -->
+      <div class="topic" id="u6-1">
+        <h3>1. Introduction to File</h3>
+
+        <div class="definition">
+          A <strong>file</strong> is a container for storing data <em>permanently</em> on a computer's storage device. In Java, files are used to keep information that should persist even after the program ends.
+        </div>
+
+        <h4>Why File Handling?</h4>
+        <ul>
+          <li><strong>Persistent storage</strong> — data stays even after the program exits.</li>
+          <li><strong>Data sharing</strong> — share information between different programs.</li>
+          <li><strong>Logging</strong> — store events, errors, or audit information.</li>
+          <li><strong>Configuration</strong> — read app settings from files.</li>
+        </ul>
+
+        <h4>Common File Operations</h4>
+        <div class="cards">
+          <div class="card"><h5>Create</h5><p>Make a new file on disk.</p></div>
+          <div class="card"><h5>Write</h5><p>Save data into the file.</p></div>
+          <div class="card"><h5>Read</h5><p>Get data back from the file.</p></div>
+          <div class="card"><h5>Delete</h5><p>Remove the file from disk.</p></div>
+        </div>
+
+        <div class="callout exam">
+          <span class="icon">🎯</span>
+          <div class="body">
+            <div class="title">Exam Tip</div>
+            Always mention <strong>persistent storage</strong> in your definition of file handling.
+          </div>
+        </div>
+      </div>
+
+      <!-- 6.2 java.io -->
+      <div class="topic" id="u6-2">
+        <h3>2. <code>java.io</code> Package</h3>
+
+        <div class="definition">
+          The <code>java.io</code> package provides classes for <strong>input and output</strong> through data streams, serialization, and the file system.
+        </div>
+
+        <h4>Streams in Java</h4>
+        <p>A <strong>stream</strong> is a sequence of data. Java has two kinds:</p>
+        <ul>
+          <li><strong>Byte streams</strong> — handle binary data (images, audio). Classes end with <code>Stream</code>.</li>
+          <li><strong>Character streams</strong> — handle text (Unicode). Classes end with <code>Reader</code> or <code>Writer</code>.</li>
+        </ul>
+
+        <h4>Important Classes in <code>java.io</code></h4>
+        <table>
+          <tr><th>Class</th><th>Purpose</th></tr>
+          <tr><td><code>File</code></td><td>Represents a file or directory path</td></tr>
+          <tr><td><code>FileInputStream</code></td><td>Read raw bytes from a file</td></tr>
+          <tr><td><code>FileOutputStream</code></td><td>Write raw bytes to a file</td></tr>
+          <tr><td><code>FileReader</code></td><td>Read characters from a file</td></tr>
+          <tr><td><code>FileWriter</code></td><td>Write characters to a file</td></tr>
+          <tr><td><code>BufferedReader</code></td><td>Read text efficiently, line by line</td></tr>
+          <tr><td><code>BufferedWriter</code></td><td>Write text efficiently</td></tr>
+          <tr><td><code>PrintWriter</code></td><td>Print formatted text to a file</td></tr>
+        </table>
+
+        <h4>Importing the Package</h4>
+<pre><code><span class="kw">import</span> java.io.*;     <span class="com">// imports all java.io classes</span></code></pre>
+      </div>
+
+      <!-- 6.3 File class -->
+      <div class="topic" id="u6-3">
+        <h3>3. <code>File</code> Class</h3>
+
+        <div class="definition">
+          The <code>File</code> class (in <code>java.io</code>) is used to represent a <strong>file or directory pathname</strong> in an abstract way. It does <em>not</em> deal with the contents of the file — only with its <strong>metadata</strong> (name, size, permissions, existence).
+        </div>
+
+        <h4>Creating a File Object</h4>
+<pre><code><span class="typ">File</span> f = <span class="kw">new</span> <span class="typ">File</span>(<span class="str">"test.txt"</span>);</code></pre>
+
+        <h4>Important Methods of <code>File</code></h4>
+        <table>
+          <tr><th>Method</th><th>Description</th></tr>
+          <tr><td><code>createNewFile()</code></td><td>Creates a new empty file. Returns <code>true</code> if created.</td></tr>
+          <tr><td><code>exists()</code></td><td>Returns <code>true</code> if the file exists.</td></tr>
+          <tr><td><code>delete()</code></td><td>Deletes the file or directory.</td></tr>
+          <tr><td><code>getName()</code></td><td>Returns the file name.</td></tr>
+          <tr><td><code>getAbsolutePath()</code></td><td>Returns the full absolute path.</td></tr>
+          <tr><td><code>length()</code></td><td>Returns the file size in bytes.</td></tr>
+          <tr><td><code>canRead()</code></td><td>Checks if the file is readable.</td></tr>
+          <tr><td><code>canWrite()</code></td><td>Checks if the file is writable.</td></tr>
+          <tr><td><code>isFile()</code></td><td>Checks if it's a normal file.</td></tr>
+          <tr><td><code>isDirectory()</code></td><td>Checks if it's a directory.</td></tr>
+          <tr><td><code>list()</code></td><td>Lists the contents of a directory.</td></tr>
+        </table>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">import</span> java.io.*;
+
+<span class="kw">class</span> <span class="typ">FileInfo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) <span class="kw">throws</span> <span class="typ">IOException</span> {
+        <span class="typ">File</span> f = <span class="kw">new</span> <span class="typ">File</span>(<span class="str">"test.txt"</span>);
+
+        <span class="kw">if</span> (!f.<span class="fn">exists</span>()) f.<span class="fn">createNewFile</span>();
+
+        System.out.println(<span class="str">"Name: "</span>      + f.<span class="fn">getName</span>());
+        System.out.println(<span class="str">"Path: "</span>      + f.<span class="fn">getAbsolutePath</span>());
+        System.out.println(<span class="str">"Size: "</span>      + f.<span class="fn">length</span>() + <span class="str">" bytes"</span>);
+        System.out.println(<span class="str">"Readable: "</span>  + f.<span class="fn">canRead</span>());
+        System.out.println(<span class="str">"Writable: "</span>  + f.<span class="fn">canWrite</span>());
+    }
+}</code></pre>
+
+        <div class="callout exam">
+          <span class="icon">🎯</span>
+          <div class="body">
+            <div class="title">Exam Tip</div>
+            Always mention that the <code>File</code> class deals with <strong>metadata</strong>, not file content directly.
+          </div>
+        </div>
+      </div>
+
+      <!-- 6.4 Create -->
+      <div class="topic" id="u6-4">
+        <h3>4. Creating a File</h3>
+
+        <p>Use <code>createNewFile()</code> to make a new empty file. It returns <code>true</code> if successful, <code>false</code> if the file already exists.</p>
+
+<pre><code><span class="kw">import</span> java.io.*;
+
+<span class="kw">class</span> <span class="typ">CreateFile</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="kw">try</span> {
+            <span class="typ">File</span> f = <span class="kw">new</span> <span class="typ">File</span>(<span class="str">"test.txt"</span>);
+            <span class="kw">if</span> (f.<span class="fn">createNewFile</span>())
+                System.out.println(<span class="str">"File created: "</span> + f.<span class="fn">getName</span>());
+            <span class="kw">else</span>
+                System.out.println(<span class="str">"File already exists."</span>);
+        } <span class="kw">catch</span> (<span class="typ">IOException</span> e) {
+            System.out.println(<span class="str">"An error occurred."</span>);
+            e.<span class="fn">printStackTrace</span>();
+        }
+    }
+}</code></pre>
+      </div>
+
+      <!-- 6.5 Write -->
+      <div class="topic" id="u6-5">
+        <h3>5. Writing to a File</h3>
+
+        <p>Use <code>FileWriter</code> to write characters to a file. Always remember to <strong>close the stream</strong> after writing — otherwise data may not be saved.</p>
+
+<pre><code><span class="kw">import</span> java.io.*;
+
+<span class="kw">class</span> <span class="typ">WriteFile</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="kw">try</span> {
+            <span class="typ">FileWriter</span> fw = <span class="kw">new</span> <span class="typ">FileWriter</span>(<span class="str">"test.txt"</span>);
+            fw.<span class="fn">write</span>(<span class="str">"Hello World!\n"</span>);
+            fw.<span class="fn">write</span>(<span class="str">"This is Java file handling."</span>);
+            fw.<span class="fn">close</span>();
+            System.out.println(<span class="str">"Successfully wrote to the file."</span>);
+        } <span class="kw">catch</span> (<span class="typ">IOException</span> e) {
+            System.out.println(<span class="str">"Error writing file."</span>);
+        }
+    }
+}</code></pre>
+
+        <div class="callout note">
+          <span class="icon">💡</span>
+          <div class="body">
+            <div class="title">Append Mode</div>
+            <code>new FileWriter("test.txt", true)</code> opens the file in <strong>append</strong> mode — new data is added at the end instead of overwriting.
+          </div>
+        </div>
+      </div>
+
+      <!-- 6.6 Read -->
+      <div class="topic" id="u6-6">
+        <h3>6. Reading from a File</h3>
+
+        <h4>Method 1: Using <code>FileReader</code> (character by character)</h4>
+<pre><code><span class="kw">import</span> java.io.*;
+
+<span class="kw">class</span> <span class="typ">ReadFile</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="kw">try</span> {
+            <span class="typ">FileReader</span> fr = <span class="kw">new</span> <span class="typ">FileReader</span>(<span class="str">"test.txt"</span>);
+            <span class="kw">int</span> i;
+            <span class="kw">while</span> ((i = fr.<span class="fn">read</span>()) != -<span class="num">1</span>) {
+                System.out.print((<span class="kw">char</span>) i);
+            }
+            fr.<span class="fn">close</span>();
+        } <span class="kw">catch</span> (<span class="typ">IOException</span> e) {
+            System.out.println(<span class="str">"Error reading file."</span>);
+        }
+    }
+}</code></pre>
+
+        <h4>Method 2: Using <code>BufferedReader</code> (line by line — efficient)</h4>
+<pre><code><span class="kw">import</span> java.io.*;
+
+<span class="kw">class</span> <span class="typ">ReadFileBuffered</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="kw">try</span> {
+            <span class="typ">BufferedReader</span> br = <span class="kw">new</span> <span class="typ">BufferedReader</span>(<span class="kw">new</span> <span class="typ">FileReader</span>(<span class="str">"test.txt"</span>));
+            String line;
+            <span class="kw">while</span> ((line = br.<span class="fn">readLine</span>()) != <span class="kw">null</span>) {
+                System.out.println(line);
+            }
+            br.<span class="fn">close</span>();
+        } <span class="kw">catch</span> (<span class="typ">IOException</span> e) {
+            System.out.println(<span class="str">"Error reading file."</span>);
+        }
+    }
+}</code></pre>
+      </div>
+
+      <!-- 6.7 Delete -->
+      <div class="topic" id="u6-7">
+        <h3>7. Deleting a File</h3>
+
+        <p>Use the <code>delete()</code> method of the <code>File</code> class. It returns <code>true</code> if the file was successfully deleted.</p>
+
+<pre><code><span class="kw">import</span> java.io.*;
+
+<span class="kw">class</span> <span class="typ">DeleteFile</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">File</span> f = <span class="kw">new</span> <span class="typ">File</span>(<span class="str">"test.txt"</span>);
+        <span class="kw">if</span> (f.<span class="fn">delete</span>())
+            System.out.println(f.<span class="fn">getName</span>() + <span class="str">" deleted."</span>);
+        <span class="kw">else</span>
+            System.out.println(<span class="str">"Failed to delete file."</span>);
+    }
+}</code></pre>
+
+        <h4>Complete Program: All 4 Operations</h4>
+<pre><code><span class="kw">import</span> java.io.*;
+
+<span class="kw">class</span> <span class="typ">FileDemo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) <span class="kw">throws</span> <span class="typ">IOException</span> {
+        <span class="com">// 1. CREATE</span>
+        <span class="typ">File</span> f = <span class="kw">new</span> <span class="typ">File</span>(<span class="str">"demo.txt"</span>);
+        f.<span class="fn">createNewFile</span>();
+
+        <span class="com">// 2. WRITE</span>
+        <span class="typ">FileWriter</span> fw = <span class="kw">new</span> <span class="typ">FileWriter</span>(f);
+        fw.<span class="fn">write</span>(<span class="str">"Java File Handling Demo"</span>);
+        fw.<span class="fn">close</span>();
+
+        <span class="com">// 3. READ</span>
+        <span class="typ">BufferedReader</span> br = <span class="kw">new</span> <span class="typ">BufferedReader</span>(<span class="kw">new</span> <span class="typ">FileReader</span>(f));
+        String line;
+        <span class="kw">while</span> ((line = br.<span class="fn">readLine</span>()) != <span class="kw">null</span>)
+            System.out.println(line);
+        br.<span class="fn">close</span>();
+
+        <span class="com">// 4. DELETE</span>
+        f.<span class="fn">delete</span>();
+        System.out.println(<span class="str">"File deleted."</span>);
+    }
+}</code></pre>
+
+        <div class="callout success">
+          <span class="icon">✓</span>
+          <div class="body">
+            <div class="title">You made it!</div>
+            You now know all the basics of file handling in Java — Create, Write, Read, and Delete.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </div> <!-- /container -->
+
+    <footer>
+      <p><strong>Java OOP — Complete Notes</strong> · Units 4, 5 &amp; 6</p>
+      <p>Tip: Press <kbd>Ctrl + P</kbd> to print or save as PDF.</p>
+    </footer>
+  </main>
+</div>
+
+</body>
+</html>
