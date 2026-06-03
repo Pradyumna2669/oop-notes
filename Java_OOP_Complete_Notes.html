@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Java OOP — Complete Notes (Units 4, 5, 6)</title>
+<title>Java OOP — Complete Notes (Units 1–6)</title>
 <style>
   /* ============================================================
      RESET & BASE
@@ -372,9 +372,48 @@
   <!-- ====================== SIDEBAR ====================== -->
   <aside class="sidebar">
     <h2>Java OOP Notes</h2>
-    <div class="subtitle">Units 4, 5 &amp; 6 — Complete Guide</div>
+    <div class="subtitle">Units 1–6 — Complete Guide</div>
     <nav>
       <ul>
+        <li>
+          <span class="unit-title">Unit 1 — Intro to OOP &amp; Java</span>
+          <ul>
+            <li><a href="#u1-1">1. Procedure vs Object Oriented</a></li>
+            <li><a href="#u1-2">2. Introduction to OOP</a></li>
+            <li><a href="#u1-3">3. Need of OOP</a></li>
+            <li><a href="#u1-4">4. Principles &amp; Features of OOP</a></li>
+            <li><a href="#u1-5">5. JDK, JVM &amp; JRE</a></li>
+            <li><a href="#u1-6">6. Set up Java Environment</a></li>
+            <li><a href="#u1-7">7. Structure of Java Program</a></li>
+            <li><a href="#u1-8">8. Execution of a Program</a></li>
+          </ul>
+        </li>
+        <li>
+          <span class="unit-title">Unit 2 — Foundation of Java</span>
+          <ul>
+            <li><a href="#u2-1">1. Data Types</a></li>
+            <li><a href="#u2-2">2. Type Conversion &amp; Casting</a></li>
+            <li><a href="#u2-3">3. Operators</a></li>
+            <li><a href="#u2-4">4. Precedence &amp; Associativity</a></li>
+            <li><a href="#u2-5">5. Conditional Statements</a></li>
+            <li><a href="#u2-6">6. Loops</a></li>
+            <li><a href="#u2-7">7. Branching Statements</a></li>
+          </ul>
+        </li>
+        <li>
+          <span class="unit-title">Unit 3 — Encapsulation</span>
+          <ul>
+            <li><a href="#u3-1">1. Classes &amp; Objects</a></li>
+            <li><a href="#u3-2">2. Methods</a></li>
+            <li><a href="#u3-3">3. Constructors</a></li>
+            <li><a href="#u3-4">4. this Keyword</a></li>
+            <li><a href="#u3-5">5. Garbage Collection</a></li>
+            <li><a href="#u3-6">6. Arrays</a></li>
+            <li><a href="#u3-7">7. Command Line Arguments</a></li>
+            <li><a href="#u3-8">8. Scanner Class</a></li>
+            <li><a href="#u3-9">9. Enumerated Type (enum)</a></li>
+          </ul>
+        </li>
         <li>
           <span class="unit-title">Unit 4 — Inheritance &amp; Polymorphism</span>
           <ul>
@@ -421,8 +460,11 @@
 
     <div class="cover">
       <h1>Java OOP — Complete Notes</h1>
-      <p>A clear, beginner-friendly guide covering Inheritance &amp; Polymorphism, Exception Handling, and File Handling — built to take you from <strong>zero</strong> to <strong>exam-ready</strong>.</p>
+      <p>A clear, beginner-friendly guide covering OOP foundations, Java basics, Encapsulation, Inheritance &amp; Polymorphism, Exception Handling, and File Handling — built to take you from <strong>zero</strong> to <strong>exam-ready</strong>.</p>
       <div class="badges">
+        <span class="badge">Unit 1 · OOP &amp; Java</span>
+        <span class="badge">Unit 2 · Foundations</span>
+        <span class="badge">Unit 3 · Encapsulation</span>
         <span class="badge">Unit 4 · Inheritance</span>
         <span class="badge">Unit 5 · Exceptions</span>
         <span class="badge">Unit 6 · File I/O</span>
@@ -430,6 +472,1055 @@
     </div>
 
     <div class="container">
+
+    <!-- ====================================================
+         UNIT 1 — INTRODUCTION TO OOP & JAVA
+         ==================================================== -->
+    <section class="unit" id="unit1">
+      <div class="unit-header">
+        <div class="unit-number">01</div>
+        <div>
+          <h2>Introduction to OOP &amp; Java</h2>
+          <p>What OOP is, why it exists, and how Java actually runs your code.</p>
+        </div>
+      </div>
+
+      <!-- 1.1 Procedure vs OOP -->
+      <div class="topic" id="u1-1">
+        <h3>1. Procedure-Oriented vs Object-Oriented Programming</h3>
+
+        <div class="definition">
+          <strong>Procedure-Oriented Programming (POP)</strong> structures a program as a list of <em>procedures</em> (functions) that operate on data. <strong>Object-Oriented Programming (OOP)</strong> structures a program around <em>objects</em> that bundle data and the functions that work on that data together.
+        </div>
+
+        <h4>POP — How It Thinks</h4>
+        <ul>
+          <li>Program = a sequence of functions called one after another.</li>
+          <li>Data moves <strong>openly</strong> between functions (mostly global).</li>
+          <li>Focus is on <strong>"what steps to perform"</strong>.</li>
+          <li>Examples: C, Pascal, FORTRAN.</li>
+        </ul>
+
+        <h4>OOP — How It Thinks</h4>
+        <ul>
+          <li>Program = a set of objects that talk to each other.</li>
+          <li>Data is <strong>hidden</strong> inside objects (encapsulation).</li>
+          <li>Focus is on <strong>"which objects exist and what they do"</strong>.</li>
+          <li>Examples: Java, C++, Python, C#.</li>
+        </ul>
+
+        <h4>POP vs OOP — Comparison</h4>
+        <table>
+          <tr><th>Feature</th><th>Procedure-Oriented</th><th>Object-Oriented</th></tr>
+          <tr><td>Basic unit</td><td>Function / procedure</td><td>Object &amp; class</td></tr>
+          <tr><td>Approach</td><td>Top-down</td><td>Bottom-up</td></tr>
+          <tr><td>Data access</td><td>Data is mostly global, freely accessible</td><td>Data is hidden inside objects</td></tr>
+          <tr><td>Data security</td><td>Low — data exposed to all functions</td><td>High — controlled by access modifiers</td></tr>
+          <tr><td>Reusability</td><td>Limited</td><td>High (inheritance)</td></tr>
+          <tr><td>Real-world modelling</td><td>Poor</td><td>Excellent</td></tr>
+          <tr><td>Example languages</td><td>C, Pascal</td><td>Java, C++, Python</td></tr>
+        </table>
+
+        <div class="callout exam">
+          <span class="icon">🎯</span>
+          <div class="body">
+            <div class="title">Exam Tip</div>
+            Remember the one-line difference: <strong>POP gives importance to functions; OOP gives importance to data (objects)</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.2 Introduction to OOP -->
+      <div class="topic" id="u1-2">
+        <h3>2. Introduction to OOP</h3>
+
+        <div class="definition">
+          <strong>Object-Oriented Programming (OOP)</strong> is a programming paradigm based on the concept of <strong>objects</strong> — real-world entities that have a <em>state</em> (data/fields) and <em>behavior</em> (methods/functions).
+        </div>
+
+        <h4>Two Core Building Blocks</h4>
+        <div class="cards">
+          <div class="card">
+            <h5>Class</h5>
+            <p>A <strong>blueprint</strong> or template. It defines what data and behavior its objects will have. E.g., <code>Car</code>.</p>
+          </div>
+          <div class="card">
+            <h5>Object</h5>
+            <p>A real <strong>instance</strong> of a class — it occupies memory. E.g., <code>myCar</code>, <code>yourCar</code>.</p>
+          </div>
+        </div>
+
+        <h4>Real-World Analogy</h4>
+        <p>Think of a <strong>Car</strong>. Its <em>state</em> is colour, model, and speed. Its <em>behavior</em> is start, accelerate, and brake. A <code>Car</code> class describes that idea; each actual car you build from it is an <strong>object</strong>.</p>
+
+<pre><code><span class="kw">class</span> <span class="typ">Car</span> {
+    String color;            <span class="com">// state</span>
+    <span class="kw">int</span> speed;
+
+    <span class="kw">void</span> <span class="fn">accelerate</span>() {       <span class="com">// behavior</span>
+        speed += <span class="num">10</span>;
+        System.out.println(<span class="str">"Speed: "</span> + speed);
+    }
+}
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Car</span> myCar = <span class="kw">new</span> <span class="typ">Car</span>();   <span class="com">// object created</span>
+        myCar.color = <span class="str">"Red"</span>;
+        myCar.<span class="fn">accelerate</span>();           <span class="com">// Speed: 10</span>
+    }
+}</code></pre>
+      </div>
+
+      <!-- 1.3 Need of OOP -->
+      <div class="topic" id="u1-3">
+        <h3>3. Need of OOP</h3>
+
+        <p>Procedure-oriented programs become hard to manage as they grow. OOP was created to solve those exact problems.</p>
+
+        <h4>Problems with the Old Approach</h4>
+        <ul>
+          <li>Global data is <strong>unsafe</strong> — any function can change it.</li>
+          <li>Code is <strong>hard to reuse</strong> — you copy-paste functions.</li>
+          <li>Large programs become <strong>tangled</strong> and hard to debug.</li>
+          <li>It doesn't naturally model <strong>real-world entities</strong>.</li>
+        </ul>
+
+        <h4>How OOP Solves Them</h4>
+        <table>
+          <tr><th>Need</th><th>OOP Feature that Solves It</th></tr>
+          <tr><td>Protect data from misuse</td><td><strong>Encapsulation</strong> (data hiding)</td></tr>
+          <tr><td>Reuse existing code</td><td><strong>Inheritance</strong></td></tr>
+          <tr><td>Hide complexity from the user</td><td><strong>Abstraction</strong></td></tr>
+          <tr><td>One interface, many behaviors</td><td><strong>Polymorphism</strong></td></tr>
+          <tr><td>Model real-world things</td><td><strong>Objects &amp; Classes</strong></td></tr>
+        </table>
+
+        <div class="callout success">
+          <span class="icon">✓</span>
+          <div class="body">
+            <div class="title">In one line</div>
+            OOP is needed because it makes large programs <strong>secure, reusable, modular, and easy to maintain</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.4 Principles & Features -->
+      <div class="topic" id="u1-4">
+        <h3>4. Principles &amp; Features of OOP</h3>
+
+        <p>OOP stands on <strong>four pillars</strong>. Memorise them with the trick <strong>A-PIE</strong>: <strong>A</strong>bstraction, <strong>P</strong>olymorphism, <strong>I</strong>nheritance, <strong>E</strong>ncapsulation.</p>
+
+        <h4>The Four Pillars</h4>
+        <div class="cards">
+          <div class="card">
+            <h5>1. Encapsulation</h5>
+            <p>Wrapping data and methods into a single unit (class) and hiding the data using access modifiers.</p>
+          </div>
+          <div class="card">
+            <h5>2. Abstraction</h5>
+            <p>Showing only essential features and hiding the internal details. E.g., you drive a car without knowing the engine internals.</p>
+          </div>
+          <div class="card">
+            <h5>3. Inheritance</h5>
+            <p>One class acquires the properties of another. Enables code reuse. "Dog IS-A Animal".</p>
+          </div>
+          <div class="card">
+            <h5>4. Polymorphism</h5>
+            <p>"Many forms" — the same method behaves differently for different objects (overloading &amp; overriding).</p>
+          </div>
+        </div>
+
+        <h4>Other Key Features of OOP</h4>
+        <ul>
+          <li><strong>Class &amp; Object</strong> — the fundamental units.</li>
+          <li><strong>Message passing</strong> — objects communicate by calling methods.</li>
+          <li><strong>Data security</strong> — through access modifiers (<code>private</code>, <code>public</code>, <code>protected</code>).</li>
+          <li><strong>Reusability &amp; extensibility</strong> — via inheritance.</li>
+        </ul>
+
+        <div class="callout exam">
+          <span class="icon">🎯</span>
+          <div class="body">
+            <div class="title">Exam Tip</div>
+            Always list the <strong>four pillars (A-PIE)</strong> with a one-line definition and a tiny example for each.
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.5 JDK JVM JRE -->
+      <div class="topic" id="u1-5">
+        <h3>5. JDK, JVM &amp; JRE</h3>
+
+        <p>These three are the heart of how Java works. Understanding them is a guaranteed exam question.</p>
+
+        <h4>JVM — Java Virtual Machine</h4>
+        <div class="definition">
+          The <strong>JVM</strong> is an abstract machine that <em>runs</em> Java bytecode. It is the reason Java is <strong>platform-independent</strong> — "Write Once, Run Anywhere" (WORA).
+        </div>
+        <ul>
+          <li>Loads <code>.class</code> (bytecode) files.</li>
+          <li>Verifies the bytecode for security.</li>
+          <li>Converts bytecode into machine code and executes it.</li>
+          <li>The JVM is platform-<strong>dependent</strong>, but the bytecode it runs is platform-<strong>independent</strong>.</li>
+        </ul>
+
+        <h4>JRE — Java Runtime Environment</h4>
+        <div class="definition">
+          The <strong>JRE</strong> provides everything needed to <em>run</em> a Java program. It contains the <strong>JVM + core libraries</strong>, but <em>no</em> development tools.
+        </div>
+        <p><code>JRE = JVM + Java Class Libraries</code>. Use the JRE if you only want to run Java apps, not write them.</p>
+
+        <h4>JDK — Java Development Kit</h4>
+        <div class="definition">
+          The <strong>JDK</strong> is the full toolkit to <em>develop and run</em> Java programs. It contains the <strong>JRE + development tools</strong> like the compiler (<code>javac</code>) and debugger.
+        </div>
+        <p><code>JDK = JRE + Development Tools (javac, javadoc, jdb…)</code></p>
+
+        <h4>Relationship Diagram</h4>
+<pre class="ascii"><code>┌─────────────────────────────────────────┐
+│                 JDK                       │
+│   (Java Development Kit)                   │
+│                                           │
+│   ┌───────────────────────────────────┐   │
+│   │              JRE                    │  │
+│   │   (Java Runtime Environment)        │  │
+│   │                                     │  │
+│   │   ┌─────────────────────────────┐   │  │
+│   │   │           JVM                 │  │  │
+│   │   │  (runs the bytecode)          │  │  │
+│   │   └─────────────────────────────┘   │  │
+│   │   + Core Libraries                  │  │
+│   └───────────────────────────────────┘   │
+│   + javac, javadoc, jdb, jar …            │
+└─────────────────────────────────────────┘
+
+       JDK  ⊃  JRE  ⊃  JVM</code></pre>
+
+        <h4>Quick Comparison</h4>
+        <table>
+          <tr><th></th><th>JDK</th><th>JRE</th><th>JVM</th></tr>
+          <tr><td>Full form</td><td>Java Development Kit</td><td>Java Runtime Environment</td><td>Java Virtual Machine</td></tr>
+          <tr><td>Purpose</td><td>Develop + run</td><td>Run only</td><td>Execute bytecode</td></tr>
+          <tr><td>Contains</td><td>JRE + tools</td><td>JVM + libraries</td><td>Execution engine</td></tr>
+          <tr><td>For whom</td><td>Developers</td><td>End users</td><td>Internal component</td></tr>
+        </table>
+      </div>
+
+      <!-- 1.6 Set up environment -->
+      <div class="topic" id="u1-6">
+        <h3>6. Setting Up the Java Development Environment</h3>
+
+        <p>Before writing Java, you need the JDK installed and the system configured to find it.</p>
+
+        <h4>Steps</h4>
+        <ol>
+          <li><strong>Download the JDK</strong> from Oracle or adopt OpenJDK.</li>
+          <li><strong>Install</strong> it (note the install folder, e.g. <code>C:\Program Files\Java\jdk-21</code>).</li>
+          <li><strong>Set the <code>PATH</code></strong> environment variable to the JDK's <code>bin</code> folder so <code>javac</code> works from any directory.</li>
+          <li>(Optional) <strong>Set <code>JAVA_HOME</code></strong> to the JDK root folder.</li>
+          <li><strong>Verify</strong> the installation from a terminal.</li>
+        </ol>
+
+        <h4>Verify Installation</h4>
+<pre class="ascii"><code>&gt; java -version
+java version "21.0.1" 2023-10-17 LTS
+
+&gt; javac -version
+javac 21.0.1</code></pre>
+
+        <div class="callout note">
+          <span class="icon">💡</span>
+          <div class="body">
+            <div class="title">PATH vs JAVA_HOME</div>
+            <strong>PATH</strong> lets the OS find the <code>java</code>/<code>javac</code> commands. <strong>JAVA_HOME</strong> points tools (like build systems) to the JDK root folder.
+          </div>
+        </div>
+
+        <p>You can write Java in any text editor (Notepad, VS Code) or a full IDE like <strong>IntelliJ IDEA</strong>, <strong>Eclipse</strong>, or <strong>NetBeans</strong>.</p>
+      </div>
+
+      <!-- 1.7 Structure of Java program -->
+      <div class="topic" id="u1-7">
+        <h3>7. Structure of a Java Program</h3>
+
+        <p>A typical Java program is organised into clear sections, from top to bottom:</p>
+
+        <ol>
+          <li><strong>Documentation section</strong> — comments describing the program (optional).</li>
+          <li><strong>Package statement</strong> — declares the package (optional, first line if present).</li>
+          <li><strong>Import statements</strong> — bring in other classes.</li>
+          <li><strong>Class definition</strong> — the program lives inside a class.</li>
+          <li><strong>main() method</strong> — the entry point where execution begins.</li>
+        </ol>
+
+        <h4>Annotated Example</h4>
+<pre><code><span class="com">/* Documentation: My first Java program */</span>
+
+<span class="kw">package</span> mypack;            <span class="com">// (optional) package statement</span>
+
+<span class="kw">import</span> java.util.*;          <span class="com">// import statement</span>
+
+<span class="kw">public class</span> <span class="typ">Hello</span> {       <span class="com">// class definition</span>
+
+    <span class="com">// main method — program starts here</span>
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        System.out.println(<span class="str">"Hello, World!"</span>);
+    }
+}</code></pre>
+
+        <h4>Breaking Down <code>main</code></h4>
+        <table>
+          <tr><th>Part</th><th>Meaning</th></tr>
+          <tr><td><code>public</code></td><td>Accessible from anywhere — the JVM must call it.</td></tr>
+          <tr><td><code>static</code></td><td>Runs without creating an object of the class.</td></tr>
+          <tr><td><code>void</code></td><td>Returns nothing.</td></tr>
+          <tr><td><code>main</code></td><td>The fixed name the JVM looks for as the entry point.</td></tr>
+          <tr><td><code>String[] args</code></td><td>Receives command-line arguments.</td></tr>
+        </table>
+
+        <div class="callout warning">
+          <span class="icon">⚠</span>
+          <div class="body">
+            <div class="title">File-naming rule</div>
+            A <code>public</code> class must be saved in a file with the <strong>exact same name</strong> — class <code>Hello</code> → file <code>Hello.java</code>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.8 Execution -->
+      <div class="topic" id="u1-8">
+        <h3>8. Execution of a Simple Java Program</h3>
+
+        <p>Java runs in <strong>two stages</strong>: first <em>compile</em> the source into bytecode, then <em>run</em> the bytecode on the JVM.</p>
+
+        <h4>Step 1 — Compile</h4>
+        <p>The compiler <code>javac</code> turns <code>Hello.java</code> (source) into <code>Hello.class</code> (bytecode).</p>
+<pre class="ascii"><code>&gt; javac Hello.java     →   produces Hello.class</code></pre>
+
+        <h4>Step 2 — Run</h4>
+        <p>The <code>java</code> command loads <code>Hello.class</code> into the JVM, which executes it.</p>
+<pre class="ascii"><code>&gt; java Hello
+Hello, World!</code></pre>
+
+        <h4>The Full Pipeline</h4>
+<pre class="ascii"><code>  Hello.java          javac           Hello.class          JVM            Output
+ (source code)  ───────────────▶   (bytecode)   ───────────────▶   "Hello, World!"
+                  COMPILE TIME                       RUN TIME
+
+  Platform-independent bytecode is the magic:
+  the SAME Hello.class runs on Windows, Linux, or macOS
+  because each OS has its own JVM.</code></pre>
+
+        <div class="callout exam">
+          <span class="icon">🎯</span>
+          <div class="body">
+            <div class="title">Exam Tip</div>
+            Two commands, two stages: <code>javac</code> = compile (source → bytecode), <code>java</code> = execute (bytecode → output). This two-step model is what makes Java <strong>portable</strong>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         UNIT 2 — FOUNDATION OF JAVA PROGRAMMING
+         ==================================================== -->
+    <section class="unit" id="unit2">
+      <div class="unit-header">
+        <div class="unit-number">02</div>
+        <div>
+          <h2>Foundation of Java Programming</h2>
+          <p>The raw materials: data types, operators, and control flow.</p>
+        </div>
+      </div>
+
+      <!-- 2.1 Data Types -->
+      <div class="topic" id="u2-1">
+        <h3>1. Data Types</h3>
+
+        <div class="definition">
+          A <strong>data type</strong> tells the compiler what <em>kind</em> of value a variable can hold and how much memory to reserve for it. Java is a <strong>strongly typed</strong> language — every variable must have a declared type.
+        </div>
+
+        <h4>Two Categories</h4>
+        <div class="cards">
+          <div class="card">
+            <h5>Primitive (8 types)</h5>
+            <p>Built-in, store actual values directly. <code>byte, short, int, long, float, double, char, boolean</code>.</p>
+          </div>
+          <div class="card">
+            <h5>Non-Primitive (Reference)</h5>
+            <p>Refer to objects in memory. <code>String</code>, arrays, classes, interfaces.</p>
+          </div>
+        </div>
+
+        <h4>The 8 Primitive Types</h4>
+        <table>
+          <tr><th>Type</th><th>Size</th><th>Default</th><th>Example</th></tr>
+          <tr><td><code>byte</code></td><td>1 byte</td><td>0</td><td><code>byte b = 100;</code></td></tr>
+          <tr><td><code>short</code></td><td>2 bytes</td><td>0</td><td><code>short s = 5000;</code></td></tr>
+          <tr><td><code>int</code></td><td>4 bytes</td><td>0</td><td><code>int i = 100000;</code></td></tr>
+          <tr><td><code>long</code></td><td>8 bytes</td><td>0L</td><td><code>long l = 99999999L;</code></td></tr>
+          <tr><td><code>float</code></td><td>4 bytes</td><td>0.0f</td><td><code>float f = 5.75f;</code></td></tr>
+          <tr><td><code>double</code></td><td>8 bytes</td><td>0.0d</td><td><code>double d = 19.99;</code></td></tr>
+          <tr><td><code>char</code></td><td>2 bytes</td><td>' '</td><td><code>char c = 'A';</code></td></tr>
+          <tr><td><code>boolean</code></td><td>1 bit</td><td>false</td><td><code>boolean flag = true;</code></td></tr>
+        </table>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">class</span> <span class="typ">DataTypes</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="kw">int</span> age = <span class="num">21</span>;
+        <span class="kw">double</span> price = <span class="num">99.99</span>;
+        <span class="kw">char</span> grade = <span class="str">'A'</span>;
+        <span class="kw">boolean</span> isPass = <span class="kw">true</span>;
+        String name = <span class="str">"Stoic"</span>;        <span class="com">// non-primitive</span>
+
+        System.out.println(name + <span class="str">" | "</span> + age + <span class="str">" | "</span> + grade);
+    }
+}</code></pre>
+
+        <div class="callout note">
+          <span class="icon">💡</span>
+          <div class="body">
+            <div class="title">Note</div>
+            <code>long</code> literals end with <code>L</code> and <code>float</code> literals end with <code>f</code>, because the defaults are <code>int</code> and <code>double</code>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.2 Type Conversion & Casting -->
+      <div class="topic" id="u2-2">
+        <h3>2. Type Conversion &amp; Casting</h3>
+
+        <div class="definition">
+          <strong>Type conversion</strong> means converting a value from one data type to another. It happens in two ways: <strong>automatic (widening)</strong> and <strong>manual (narrowing / casting)</strong>.
+        </div>
+
+        <h4>1. Widening (Implicit / Automatic)</h4>
+        <ul>
+          <li>Smaller type → larger type. Done <strong>automatically</strong> by Java.</li>
+          <li>No data loss. Safe.</li>
+          <li>Order: <code>byte → short → int → long → float → double</code>.</li>
+        </ul>
+<pre><code><span class="kw">int</span> i = <span class="num">100</span>;
+<span class="kw">double</span> d = i;        <span class="com">// int → double, automatic</span>
+System.out.println(d); <span class="com">// 100.0</span></code></pre>
+
+        <h4>2. Narrowing (Explicit / Casting)</h4>
+        <ul>
+          <li>Larger type → smaller type. Must be done <strong>manually</strong>.</li>
+          <li>Possible <strong>data loss</strong>. You take responsibility with a cast.</li>
+        </ul>
+<pre><code><span class="kw">double</span> d = <span class="num">9.78</span>;
+<span class="kw">int</span> i = (<span class="kw">int</span>) d;       <span class="com">// explicit cast, fraction lost</span>
+System.out.println(i);  <span class="com">// 9</span></code></pre>
+
+        <h4>Widening vs Narrowing</h4>
+        <table>
+          <tr><th>Feature</th><th>Widening</th><th>Narrowing</th></tr>
+          <tr><td>Direction</td><td>Small → Large</td><td>Large → Small</td></tr>
+          <tr><td>Done by</td><td>Compiler (automatic)</td><td>Programmer (manual cast)</td></tr>
+          <tr><td>Data loss</td><td>No</td><td>Possible</td></tr>
+          <tr><td>Cast operator needed?</td><td>No</td><td>Yes — <code>(type)</code></td></tr>
+        </table>
+
+        <div class="callout tip">
+          <span class="icon">🧠</span>
+          <div class="body">
+            <div class="title">Memory Trick</div>
+            <strong>W</strong>idening is <strong>W</strong>orry-free. Narrowing <strong>needs</strong> a cast.
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.3 Operators -->
+      <div class="topic" id="u2-3">
+        <h3>3. Operators</h3>
+
+        <div class="definition">
+          An <strong>operator</strong> is a symbol that performs an operation on one or more values (operands), such as <code>+</code>, <code>-</code>, <code>==</code>, or <code>&amp;&amp;</code>.
+        </div>
+
+        <h4>Categories of Operators</h4>
+        <table>
+          <tr><th>Category</th><th>Operators</th><th>Purpose</th></tr>
+          <tr><td>Arithmetic</td><td><code>+ - * / %</code></td><td>Basic math</td></tr>
+          <tr><td>Relational</td><td><code>== != &gt; &lt; &gt;= &lt;=</code></td><td>Compare values → boolean</td></tr>
+          <tr><td>Logical</td><td><code>&amp;&amp; || !</code></td><td>Combine boolean conditions</td></tr>
+          <tr><td>Assignment</td><td><code>= += -= *= /= %=</code></td><td>Assign values</td></tr>
+          <tr><td>Unary</td><td><code>++ -- + - !</code></td><td>Act on a single operand</td></tr>
+          <tr><td>Bitwise</td><td><code>&amp; | ^ ~ &lt;&lt; &gt;&gt;</code></td><td>Bit-level operations</td></tr>
+          <tr><td>Ternary</td><td><code>? :</code></td><td>Shorthand if-else</td></tr>
+        </table>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">int</span> a = <span class="num">10</span>, b = <span class="num">3</span>;
+
+System.out.println(a + b);      <span class="com">// 13  arithmetic</span>
+System.out.println(a % b);      <span class="com">// 1   remainder</span>
+System.out.println(a &gt; b);      <span class="com">// true  relational</span>
+System.out.println(a &gt; <span class="num">5</span> &amp;&amp; b &lt; <span class="num">5</span>); <span class="com">// true  logical</span>
+
+<span class="com">// ternary: condition ? valueIfTrue : valueIfFalse</span>
+String result = (a &gt; b) ? <span class="str">"a wins"</span> : <span class="str">"b wins"</span>;
+System.out.println(result);     <span class="com">// a wins</span></code></pre>
+
+        <div class="callout note">
+          <span class="icon">💡</span>
+          <div class="body">
+            <div class="title">Pre vs Post increment</div>
+            <code>++a</code> increments <em>then</em> uses the value; <code>a++</code> uses the value <em>then</em> increments.
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.4 Precedence & Associativity -->
+      <div class="topic" id="u2-4">
+        <h3>4. Precedence Rules &amp; Associativity</h3>
+
+        <div class="definition">
+          <strong>Precedence</strong> decides <em>which</em> operator runs first when several appear in one expression. <strong>Associativity</strong> decides the <em>direction</em> (left-to-right or right-to-left) when operators have the <em>same</em> precedence.
+        </div>
+
+        <h4>Example of Precedence</h4>
+<pre><code><span class="kw">int</span> x = <span class="num">2</span> + <span class="num">3</span> * <span class="num">4</span>;     <span class="com">// * before + → 2 + 12 = 14</span>
+<span class="kw">int</span> y = (<span class="num">2</span> + <span class="num">3</span>) * <span class="num">4</span>;   <span class="com">// () forces + first → 20</span></code></pre>
+
+        <h4>Precedence Table (High → Low)</h4>
+        <table>
+          <tr><th>Level</th><th>Operators</th><th>Associativity</th></tr>
+          <tr><td>1 (highest)</td><td><code>()</code> <code>[]</code> <code>.</code></td><td>Left → Right</td></tr>
+          <tr><td>2</td><td>Unary <code>++ -- + - ! ~</code></td><td>Right → Left</td></tr>
+          <tr><td>3</td><td><code>* / %</code></td><td>Left → Right</td></tr>
+          <tr><td>4</td><td><code>+ -</code></td><td>Left → Right</td></tr>
+          <tr><td>5</td><td><code>&lt; &lt;= &gt; &gt;=</code></td><td>Left → Right</td></tr>
+          <tr><td>6</td><td><code>== !=</code></td><td>Left → Right</td></tr>
+          <tr><td>7</td><td><code>&amp;&amp;</code></td><td>Left → Right</td></tr>
+          <tr><td>8</td><td><code>||</code></td><td>Left → Right</td></tr>
+          <tr><td>9</td><td><code>?:</code></td><td>Right → Left</td></tr>
+          <tr><td>10 (lowest)</td><td><code>= += -= *= /=</code></td><td>Right → Left</td></tr>
+        </table>
+
+        <div class="callout exam">
+          <span class="icon">🎯</span>
+          <div class="body">
+            <div class="title">Exam Tip</div>
+            Most operators associate <strong>left → right</strong>. The exceptions are <strong>unary</strong>, <strong>ternary</strong>, and <strong>assignment</strong>, which go <strong>right → left</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.5 Conditional -->
+      <div class="topic" id="u2-5">
+        <h3>5. Flow of Control — Conditional Statements</h3>
+
+        <p>Conditional statements let a program <strong>make decisions</strong> and run different code based on whether a condition is true or false.</p>
+
+        <h4>1. <code>if</code> / <code>else-if</code> / <code>else</code></h4>
+<pre><code><span class="kw">int</span> marks = <span class="num">75</span>;
+
+<span class="kw">if</span> (marks &gt;= <span class="num">90</span>) {
+    System.out.println(<span class="str">"Grade A"</span>);
+} <span class="kw">else if</span> (marks &gt;= <span class="num">60</span>) {
+    System.out.println(<span class="str">"Grade B"</span>);
+} <span class="kw">else</span> {
+    System.out.println(<span class="str">"Grade C"</span>);
+}</code></pre>
+
+        <h4>2. <code>switch</code></h4>
+        <p>Chooses one block out of many based on a single value. Cleaner than a long if-else chain.</p>
+<pre><code><span class="kw">int</span> day = <span class="num">3</span>;
+
+<span class="kw">switch</span> (day) {
+    <span class="kw">case</span> <span class="num">1</span>: System.out.println(<span class="str">"Monday"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">2</span>: System.out.println(<span class="str">"Tuesday"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">3</span>: System.out.println(<span class="str">"Wednesday"</span>); <span class="kw">break</span>;
+    <span class="kw">default</span>: System.out.println(<span class="str">"Other day"</span>);
+}</code></pre>
+
+        <div class="callout warning">
+          <span class="icon">⚠</span>
+          <div class="body">
+            <div class="title">Don't forget <code>break</code></div>
+            Without <code>break</code>, execution "falls through" into the next case. The <code>default</code> case handles unmatched values.
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.6 Loops -->
+      <div class="topic" id="u2-6">
+        <h3>6. Flow of Control — Loops</h3>
+
+        <div class="definition">
+          A <strong>loop</strong> repeats a block of code as long as a condition stays true. Java has three main loops: <code>for</code>, <code>while</code>, and <code>do-while</code>.
+        </div>
+
+        <h4>1. <code>for</code> Loop</h4>
+        <p>Best when you know <strong>how many times</strong> to repeat.</p>
+<pre><code><span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++) {
+    System.out.println(<span class="str">"Count: "</span> + i);
+}</code></pre>
+
+        <h4>2. <code>while</code> Loop</h4>
+        <p>Best when the number of repetitions is <strong>unknown</strong>. Condition checked <strong>before</strong> the body (entry-controlled).</p>
+<pre><code><span class="kw">int</span> i = <span class="num">1</span>;
+<span class="kw">while</span> (i &lt;= <span class="num">5</span>) {
+    System.out.println(i);
+    i++;
+}</code></pre>
+
+        <h4>3. <code>do-while</code> Loop</h4>
+        <p>Runs the body <strong>at least once</strong>, because the condition is checked <strong>after</strong> the body (exit-controlled).</p>
+<pre><code><span class="kw">int</span> i = <span class="num">1</span>;
+<span class="kw">do</span> {
+    System.out.println(i);
+    i++;
+} <span class="kw">while</span> (i &lt;= <span class="num">5</span>);</code></pre>
+
+        <h4>Comparison</h4>
+        <table>
+          <tr><th>Loop</th><th>Condition checked</th><th>Min runs</th><th>Use when</th></tr>
+          <tr><td><code>for</code></td><td>Before</td><td>0</td><td>Count is known</td></tr>
+          <tr><td><code>while</code></td><td>Before</td><td>0</td><td>Count is unknown</td></tr>
+          <tr><td><code>do-while</code></td><td>After</td><td>1</td><td>Must run at least once</td></tr>
+        </table>
+
+        <h4>Enhanced <code>for</code> (for-each)</h4>
+<pre><code><span class="kw">int</span>[] nums = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>};
+<span class="kw">for</span> (<span class="kw">int</span> n : nums) {
+    System.out.println(n);
+}</code></pre>
+      </div>
+
+      <!-- 2.7 Branching -->
+      <div class="topic" id="u2-7">
+        <h3>7. Flow of Control — Branching Statements</h3>
+
+        <p>Branching (jump) statements transfer control to another part of the program.</p>
+
+        <h4>1. <code>break</code></h4>
+        <p>Immediately <strong>exits</strong> the nearest loop or <code>switch</code>.</p>
+<pre><code><span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">10</span>; i++) {
+    <span class="kw">if</span> (i == <span class="num">5</span>) <span class="kw">break</span>;     <span class="com">// stops at 5</span>
+    System.out.println(i);   <span class="com">// 1 2 3 4</span>
+}</code></pre>
+
+        <h4>2. <code>continue</code></h4>
+        <p><strong>Skips</strong> the rest of the current iteration and jumps to the next one.</p>
+<pre><code><span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++) {
+    <span class="kw">if</span> (i == <span class="num">3</span>) <span class="kw">continue</span>;  <span class="com">// skips 3</span>
+    System.out.println(i);   <span class="com">// 1 2 4 5</span>
+}</code></pre>
+
+        <h4>3. <code>return</code></h4>
+        <p><strong>Exits</strong> the current method and optionally sends back a value.</p>
+<pre><code><span class="kw">static int</span> <span class="fn">square</span>(<span class="kw">int</span> n) {
+    <span class="kw">return</span> n * n;     <span class="com">// exits method, returns value</span>
+}</code></pre>
+
+        <h4>break vs continue</h4>
+        <table>
+          <tr><th>Feature</th><th><code>break</code></th><th><code>continue</code></th></tr>
+          <tr><td>Effect</td><td>Exits the loop entirely</td><td>Skips to next iteration</td></tr>
+          <tr><td>Used in</td><td>Loops &amp; switch</td><td>Loops only</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         UNIT 3 — ENCAPSULATION
+         ==================================================== -->
+    <section class="unit" id="unit3">
+      <div class="unit-header">
+        <div class="unit-number">03</div>
+        <div>
+          <h2>Encapsulation</h2>
+          <p>Classes, objects, constructors, and the tools that bundle data with behavior.</p>
+        </div>
+      </div>
+
+      <!-- 3.1 Classes & Objects -->
+      <div class="topic" id="u3-1">
+        <h3>1. Classes &amp; Objects</h3>
+
+        <div class="definition">
+          A <strong>class</strong> is a blueprint that defines fields (data) and methods (behavior). An <strong>object</strong> is a real instance of a class that occupies memory. <strong>Encapsulation</strong> is the wrapping of data and methods into this single unit.
+        </div>
+
+        <h4>Defining a Class &amp; Creating Objects</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Student</span> {
+    <span class="com">// fields (state)</span>
+    String name;
+    <span class="kw">int</span> roll;
+
+    <span class="com">// method (behavior)</span>
+    <span class="kw">void</span> <span class="fn">display</span>() {
+        System.out.println(roll + <span class="str">" - "</span> + name);
+    }
+}
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Student</span> s1 = <span class="kw">new</span> <span class="typ">Student</span>();  <span class="com">// object</span>
+        s1.name = <span class="str">"Stoic"</span>;
+        s1.roll = <span class="num">101</span>;
+        s1.<span class="fn">display</span>();                  <span class="com">// 101 - Stoic</span>
+    }
+}</code></pre>
+
+        <h4>The <code>new</code> Keyword</h4>
+        <p><code>new</code> allocates memory for the object on the <strong>heap</strong> and returns a reference to it. <code>Student s1 = new Student();</code> — <code>s1</code> is the reference, the object lives on the heap.</p>
+
+        <h4>Encapsulation in Practice (Data Hiding)</h4>
+        <p>Make fields <code>private</code> and expose them through <code>public</code> getter/setter methods.</p>
+<pre><code><span class="kw">class</span> <span class="typ">Account</span> {
+    <span class="kw">private double</span> balance;   <span class="com">// hidden</span>
+
+    <span class="kw">public void</span> <span class="fn">setBalance</span>(<span class="kw">double</span> b) {
+        <span class="kw">if</span> (b &gt;= <span class="num">0</span>) balance = b;  <span class="com">// validation</span>
+    }
+    <span class="kw">public double</span> <span class="fn">getBalance</span>() {
+        <span class="kw">return</span> balance;
+    }
+}</code></pre>
+      </div>
+
+      <!-- 3.2 Methods -->
+      <div class="topic" id="u3-2">
+        <h3>2. Methods</h3>
+
+        <div class="definition">
+          A <strong>method</strong> is a block of code that performs a specific task and runs only when called. Methods give programs <strong>reusability</strong> and <strong>structure</strong>.
+        </div>
+
+        <h4>Anatomy of a Method</h4>
+<pre><code>  <span class="kw">public</span>  <span class="kw">int</span>   <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b)  {  <span class="kw">return</span> a + b;  }
+  ───┬──  ──┬─   ─┬─  ──────┬──────      ──────┬──────
+  modifier  |   name    parameters          body
+        return type</code></pre>
+
+        <h4>Example: Defining &amp; Calling</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Calc</span> {
+    <span class="com">// method with parameters and a return value</span>
+    <span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) {
+        <span class="kw">return</span> a + b;
+    }
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Calc</span> c = <span class="kw">new</span> <span class="typ">Calc</span>();
+        <span class="kw">int</span> sum = c.<span class="fn">add</span>(<span class="num">5</span>, <span class="num">7</span>);   <span class="com">// call</span>
+        System.out.println(sum);     <span class="com">// 12</span>
+    }
+}</code></pre>
+
+        <h4>Method Types</h4>
+        <ul>
+          <li><strong>Instance method</strong> — called on an object.</li>
+          <li><strong>Static method</strong> — called on the class itself (<code>Math.sqrt()</code>).</li>
+          <li><strong>Parameterized</strong> vs <strong>no-argument</strong> methods.</li>
+        </ul>
+      </div>
+
+      <!-- 3.3 Constructors -->
+      <div class="topic" id="u3-3">
+        <h3>3. Constructors</h3>
+
+        <div class="definition">
+          A <strong>constructor</strong> is a special method that runs <em>automatically</em> when an object is created. It is used to <strong>initialise</strong> the object. It has the <strong>same name as the class</strong> and <strong>no return type</strong>.
+        </div>
+
+        <h4>Types of Constructors</h4>
+        <div class="cards">
+          <div class="card">
+            <h5>Default</h5>
+            <p>No parameters. Provided automatically by Java if you write none.</p>
+          </div>
+          <div class="card">
+            <h5>Parameterized</h5>
+            <p>Takes arguments to set field values at creation time.</p>
+          </div>
+          <div class="card">
+            <h5>Copy</h5>
+            <p>Creates a new object by copying another object's values.</p>
+          </div>
+        </div>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">class</span> <span class="typ">Student</span> {
+    String name;
+    <span class="kw">int</span> roll;
+
+    <span class="com">// parameterized constructor</span>
+    <span class="typ">Student</span>(String n, <span class="kw">int</span> r) {
+        name = n;
+        roll = r;
+    }
+
+    <span class="kw">void</span> <span class="fn">show</span>() { System.out.println(roll + <span class="str">" "</span> + name); }
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Student</span> s = <span class="kw">new</span> <span class="typ">Student</span>(<span class="str">"Stoic"</span>, <span class="num">101</span>);
+        s.<span class="fn">show</span>();   <span class="com">// 101 Stoic</span>
+    }
+}</code></pre>
+
+        <h4>Constructor vs Method</h4>
+        <table>
+          <tr><th>Feature</th><th>Constructor</th><th>Method</th></tr>
+          <tr><td>Name</td><td>Same as class</td><td>Any valid name</td></tr>
+          <tr><td>Return type</td><td>None (not even void)</td><td>Must have one</td></tr>
+          <tr><td>Called</td><td>Automatically on <code>new</code></td><td>Explicitly by name</td></tr>
+          <tr><td>Purpose</td><td>Initialise object</td><td>Perform a task</td></tr>
+        </table>
+      </div>
+
+      <!-- 3.4 this keyword -->
+      <div class="topic" id="u3-4">
+        <h3>4. <code>this</code> Keyword</h3>
+
+        <div class="definition">
+          The <code>this</code> keyword is a reference to the <strong>current object</strong> — the object whose method or constructor is being called.
+        </div>
+
+        <h4>Main Use: Resolve Naming Conflicts</h4>
+        <p>When a parameter has the same name as a field, <code>this</code> distinguishes them.</p>
+<pre><code><span class="kw">class</span> <span class="typ">Student</span> {
+    String name;
+
+    <span class="typ">Student</span>(String name) {
+        <span class="kw">this</span>.name = name;   <span class="com">// this.name = field, name = parameter</span>
+    }
+}</code></pre>
+
+        <h4>Other Uses of <code>this</code></h4>
+        <ul>
+          <li><code>this.field</code> — refer to the current object's field.</li>
+          <li><code>this.method()</code> — call another method of the current object.</li>
+          <li><code>this(...)</code> — call another constructor of the same class (constructor chaining).</li>
+          <li>Pass the current object as an argument: <code>obj.process(this)</code>.</li>
+        </ul>
+      </div>
+
+      <!-- 3.5 Garbage Collection -->
+      <div class="topic" id="u3-5">
+        <h3>5. Garbage Collection</h3>
+
+        <div class="definition">
+          <strong>Garbage Collection (GC)</strong> is the automatic process by which the JVM <em>reclaims memory</em> occupied by objects that are no longer referenced (unreachable). Java handles memory cleanup for you — no manual <code>free()</code> as in C/C++.
+        </div>
+
+        <h4>When Does an Object Become Eligible?</h4>
+        <ul>
+          <li>Its reference is set to <code>null</code>.</li>
+          <li>The reference is reassigned to another object.</li>
+          <li>The object is created inside a method and the method ends (local scope).</li>
+        </ul>
+
+        <h4>Example</h4>
+<pre><code><span class="typ">Student</span> s1 = <span class="kw">new</span> <span class="typ">Student</span>();
+s1 = <span class="kw">null</span>;        <span class="com">// old object now unreachable → eligible for GC</span>
+
+System.<span class="fn">gc</span>();       <span class="com">// REQUEST the JVM to run GC (not guaranteed)</span></code></pre>
+
+        <h4>Key Points</h4>
+        <ul>
+          <li>GC runs on a low-priority background thread.</li>
+          <li><code>System.gc()</code> only <strong>requests</strong> collection — the JVM decides when.</li>
+          <li>The <code>finalize()</code> method was historically called before an object was collected (now deprecated).</li>
+          <li>Prevents most <strong>memory leaks</strong> automatically.</li>
+        </ul>
+
+        <div class="callout note">
+          <span class="icon">💡</span>
+          <div class="body">
+            <div class="title">Why it matters</div>
+            Automatic GC is a big reason Java is safer and easier than C/C++ — you rarely manage memory by hand.
+          </div>
+        </div>
+      </div>
+
+      <!-- 3.6 Arrays -->
+      <div class="topic" id="u3-6">
+        <h3>6. Arrays</h3>
+
+        <div class="definition">
+          An <strong>array</strong> is a container that holds a <strong>fixed number</strong> of values of the <strong>same type</strong> in contiguous memory. Array indices start at <strong>0</strong>.
+        </div>
+
+        <h4>1. One-Dimensional Array</h4>
+<pre><code><span class="com">// declaration + initialization</span>
+<span class="kw">int</span>[] marks = {<span class="num">85</span>, <span class="num">90</span>, <span class="num">78</span>, <span class="num">92</span>};
+
+<span class="com">// using new + size</span>
+<span class="kw">int</span>[] nums = <span class="kw">new int</span>[<span class="num">5</span>];   <span class="com">// 5 zeros</span>
+nums[<span class="num">0</span>] = <span class="num">10</span>;
+
+System.out.println(marks[<span class="num">1</span>]);       <span class="com">// 90</span>
+System.out.println(marks.length);    <span class="com">// 4</span></code></pre>
+
+        <h4>Looping Through an Array</h4>
+<pre><code><span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; marks.length; i++) {
+    System.out.println(marks[i]);
+}
+
+<span class="com">// for-each (enhanced for)</span>
+<span class="kw">for</span> (<span class="kw">int</span> m : marks) {
+    System.out.println(m);
+}</code></pre>
+
+        <h4>2. Two-Dimensional Array</h4>
+<pre><code><span class="kw">int</span>[][] matrix = {
+    {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>},
+    {<span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>}
+};
+
+System.out.println(matrix[<span class="num">1</span>][<span class="num">2</span>]);   <span class="com">// 6</span></code></pre>
+
+        <div class="callout warning">
+          <span class="icon">⚠</span>
+          <div class="body">
+            <div class="title">Watch the bounds</div>
+            Accessing an invalid index throws <code>ArrayIndexOutOfBoundsException</code>. Valid indices are <code>0</code> to <code>length - 1</code>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 3.7 Command line arguments -->
+      <div class="topic" id="u3-7">
+        <h3>7. Command Line Arguments</h3>
+
+        <div class="definition">
+          <strong>Command line arguments</strong> are values passed to a program <em>when it is run</em>, captured by the <code>String[] args</code> parameter of <code>main</code>.
+        </div>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">class</span> <span class="typ">CmdDemo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        System.out.println(<span class="str">"Number of args: "</span> + args.length);
+        <span class="kw">for</span> (String a : args) {
+            System.out.println(a);
+        }
+    }
+}</code></pre>
+
+        <h4>Running It</h4>
+<pre class="ascii"><code>&gt; javac CmdDemo.java
+&gt; java CmdDemo Hello World 42
+
+Number of args: 3
+Hello
+World
+42</code></pre>
+
+        <div class="callout note">
+          <span class="icon">💡</span>
+          <div class="body">
+            <div class="title">Always Strings</div>
+            Arguments arrive as <strong>String</strong>s. To do math, convert first: <code>int n = Integer.parseInt(args[0]);</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3.8 Scanner -->
+      <div class="topic" id="u3-8">
+        <h3>8. Scanner Class</h3>
+
+        <div class="definition">
+          The <code>Scanner</code> class (in <code>java.util</code>) reads <strong>input from the user</strong> at runtime — from the keyboard, files, or strings.
+        </div>
+
+        <h4>Steps to Use Scanner</h4>
+        <ol>
+          <li><code>import java.util.Scanner;</code></li>
+          <li>Create an object: <code>Scanner sc = new Scanner(System.in);</code></li>
+          <li>Read input with methods like <code>nextInt()</code>, <code>nextLine()</code>.</li>
+          <li>Close it: <code>sc.close();</code></li>
+        </ol>
+
+        <h4>Example</h4>
+<pre><code><span class="kw">import</span> java.util.Scanner;
+
+<span class="kw">class</span> <span class="typ">InputDemo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Scanner</span> sc = <span class="kw">new</span> <span class="typ">Scanner</span>(System.in);
+
+        System.out.print(<span class="str">"Enter name: "</span>);
+        String name = sc.<span class="fn">nextLine</span>();
+
+        System.out.print(<span class="str">"Enter age: "</span>);
+        <span class="kw">int</span> age = sc.<span class="fn">nextInt</span>();
+
+        System.out.println(name + <span class="str">" is "</span> + age + <span class="str">" years old."</span>);
+        sc.<span class="fn">close</span>();
+    }
+}</code></pre>
+
+        <h4>Common Scanner Methods</h4>
+        <table>
+          <tr><th>Method</th><th>Reads</th></tr>
+          <tr><td><code>nextInt()</code></td><td>An <code>int</code></td></tr>
+          <tr><td><code>nextDouble()</code></td><td>A <code>double</code></td></tr>
+          <tr><td><code>next()</code></td><td>A single word (token)</td></tr>
+          <tr><td><code>nextLine()</code></td><td>A whole line of text</td></tr>
+          <tr><td><code>nextBoolean()</code></td><td>A <code>boolean</code></td></tr>
+        </table>
+
+        <div class="callout warning">
+          <span class="icon">⚠</span>
+          <div class="body">
+            <div class="title">The nextLine() trap</div>
+            Calling <code>nextLine()</code> right after <code>nextInt()</code> reads the leftover newline. Add an extra <code>sc.nextLine();</code> to consume it.
+          </div>
+        </div>
+      </div>
+
+      <!-- 3.9 enum -->
+      <div class="topic" id="u3-9">
+        <h3>9. Enumerated Type (<code>enum</code>)</h3>
+
+        <div class="definition">
+          An <strong>enum</strong> is a special type that defines a <strong>fixed set of named constants</strong>. Use it when a variable should only hold one value from a known list — like days, directions, or states.
+        </div>
+
+        <h4>Basic Example</h4>
+<pre><code><span class="kw">enum</span> <span class="typ">Day</span> { MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY }
+
+<span class="kw">class</span> <span class="typ">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="typ">Day</span> today = <span class="typ">Day</span>.WEDNESDAY;
+        System.out.println(today);          <span class="com">// WEDNESDAY</span>
+
+        <span class="kw">switch</span> (today) {
+            <span class="kw">case</span> MONDAY:    System.out.println(<span class="str">"Start of week"</span>); <span class="kw">break</span>;
+            <span class="kw">case</span> WEDNESDAY: System.out.println(<span class="str">"Midweek"</span>);       <span class="kw">break</span>;
+            <span class="kw">default</span>:        System.out.println(<span class="str">"Some day"</span>);
+        }
+    }
+}</code></pre>
+
+        <h4>Looping Over enum Values</h4>
+<pre><code><span class="kw">for</span> (<span class="typ">Day</span> d : <span class="typ">Day</span>.<span class="fn">values</span>()) {
+    System.out.println(d);
+}</code></pre>
+
+        <h4>Why Use enum?</h4>
+        <ul>
+          <li><strong>Type safety</strong> — only valid constants can be assigned.</li>
+          <li><strong>Readability</strong> — <code>Day.MONDAY</code> beats a magic number like <code>1</code>.</li>
+          <li>Works cleanly with <code>switch</code> statements.</li>
+          <li>Useful methods: <code>values()</code> (all constants), <code>ordinal()</code> (position), <code>name()</code>.</li>
+        </ul>
+
+        <div class="callout success">
+          <span class="icon">✓</span>
+          <div class="body">
+            <div class="title">Unit 3 complete</div>
+            You now understand how Java bundles data and behavior — classes, objects, constructors, <code>this</code>, GC, arrays, input, and enums.
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ====================================================
          UNIT 4 — INHERITANCE & POLYMORPHISM
@@ -1589,7 +2680,7 @@ System.out.println(arr[<span class="num">5</span>]);    <span class="com">// ❌
     </div> <!-- /container -->
 
     <footer>
-      <p><strong>Java OOP — Complete Notes</strong> · Units 4, 5 &amp; 6</p>
+      <p><strong>Java OOP — Complete Notes</strong> · Units 1–6</p>
       <p>Tip: Press <kbd>Ctrl + P</kbd> to print or save as PDF.</p>
     </footer>
   </main>
